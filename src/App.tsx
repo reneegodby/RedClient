@@ -1,21 +1,49 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import Auth from "./components/Auth/Auth";
-import NavBar from "./components/Auth/NavBar";
+import ClientIndex from "./components/createClients/ClientIndex";
+// import NavBar from "./components/Auth/NavBar";
 
-export type Props = {
-  tokenUpdate: any;
-};
+
+// export type Props = {
+//   tokenUpdate: any;
+// };
 
 const App: React.FunctionComponent = () => {
-  const [tokenUpdate, settokenUpdate] = useState<any>("");
+  const [sessionToken, setSessionToken] = useState<any>("");
 
-  return (
-    <div className="App">
-      <NavBar clickLogout tokenUpdate={tokenUpdate} />
-      <Auth tokenUpdate={tokenUpdate} />
-    </div>
-  );
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      setSessionToken(localStorage.getItem("token") || "");
+    }
+  }, []);
+
+  const updateToken = (newToken: string) => {
+    localStorage.setItem("token", newToken);
+    setSessionToken(newToken);
+    console.log(sessionToken);
+  };
+
+  const clearToken = () => {
+    console.log("clearToken");
+    localStorage.clear();
+    setSessionToken("");
+  };
+
+  const protectedViews = () => {
+    return sessionToken === localStorage.getItem("token") ? (
+      <ClientIndex
+        token={sessionToken}
+        clickLogout={clearToken}
+        tokenUpdate={updateToken}
+      />
+    ) : (
+      <Auth updateToken={updateToken} />
+    );
+  };
+
+  return <div className="App">{protectedViews()}</div>;
+  
 };
 
 export default App;

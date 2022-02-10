@@ -1,11 +1,13 @@
 import React from "react";
-import { Form, FormGroup, Input, Button } from "reactstrap";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Form, FormGroup, Input, Button, Label } from "reactstrap";
 
 type Props = {
-  update: any;
+  updateToken: any;
 };
 
 type State = {
+  role: string;
   email: string;
   password: string;
   sessionToken: any;
@@ -15,6 +17,7 @@ class Login extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
+      role: "user",
       email: "",
       password: "",
       sessionToken: "",
@@ -24,10 +27,11 @@ class Login extends React.Component<Props, State> {
   handleSubmit = () => {
     console.log("login handle");
     console.log(this.state.email, this.state.password);
-    fetch("http://localhost:5001/users/login", {
+    fetch("http://localhost:5001/auth/login", {
       method: "POST",
       body: JSON.stringify({
-        users: {
+        user: {
+          role: this.state.role,
           email: this.state.email,
           password: this.state.password,
         },
@@ -39,9 +43,10 @@ class Login extends React.Component<Props, State> {
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-        console.log(this.props.update);
-        this.props.update(data.sessionToken);
-      });
+        console.log(this.props.updateToken);
+        this.props.updateToken(data.sessionToken);
+      })
+      .catch((e) => console.log(e));
   };
 
   render() {
@@ -50,6 +55,7 @@ class Login extends React.Component<Props, State> {
       <div>
         <h3>Login</h3>
         <Form
+        inline
           onSubmit={(e) => {
             e.preventDefault();
             this.handleSubmit();
@@ -57,20 +63,23 @@ class Login extends React.Component<Props, State> {
         >
           <FormGroup floating>
             <Input
-              type="text"
+              type="email"
               placeholder="Email"
               onChange={(e) => this.setState({ email: e.target.value })}
               value={this.state.email}
+              name="email"
             />
+          <Label for="exampleEmail">Email</Label>
           </FormGroup>
-
           <FormGroup floating>
             <Input
               type="password"
               placeholder="Password"
               onChange={(e) => this.setState({ password: e.target.value })}
               value={this.state.password}
+              name="password"
             />
+             <Label for="examplePassword">Password</Label>
           </FormGroup>
           <Button type="submit">Login</Button>
         </Form>

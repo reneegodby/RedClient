@@ -1,10 +1,12 @@
 import React from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
 import Signup from "./Signup";
 import Login from "./Login";
+
 import { Container, Row, Col } from "reactstrap";
 
 type Props = {
-  tokenUpdate: any;
+  updateToken: any;
 };
 
 type State = {
@@ -36,10 +38,10 @@ class Auth extends React.Component<Props, State> {
       <Container>
         <Row>
           <Col md="6">
-            <Signup update={this.props.tokenUpdate} />
+            <Signup update={this.props.updateToken} />
           </Col>
           <Col md="6">
-            <Login update={this.props.tokenUpdate} />
+            <Login updateToken={this.props.updateToken} />
           </Col>
         </Row>
       </Container>

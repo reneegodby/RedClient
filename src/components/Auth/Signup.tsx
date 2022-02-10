@@ -1,5 +1,7 @@
 import React from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
 import {
+  Label,
   Form,
   FormGroup,
   Input,
@@ -19,18 +21,19 @@ class Signup extends React.Component<Props, any> {
     this.state = {
       email: "",
       password: "",
-      role: "",
+      role: "user",
+      message: "",
     };
   }
-  componentDidMount = () => { };
+  componentDidMount = () => {};
 
   handleSubmit = () => {
     let errorCode: number | string;
     console.log(this.state.email, this.state.password);
-    fetch(`http://localhost:5001/users/signup`, {
+    fetch(`http://localhost:5001/auth/signup`, {
       method: "POST",
       body: JSON.stringify({
-        users: {
+        user: {
           email: this.state.email,
           password: this.state.password,
           role: this.state.role,
@@ -42,8 +45,10 @@ class Signup extends React.Component<Props, any> {
     })
       .then((response) => {
         console.log(`fetch successful ${response}`);
+
         errorCode = response.status;
         console.log(errorCode);
+
         if (errorCode === 409) {
           this.setState({ message: "Email already in use" });
           console.log(this.state.message);
@@ -71,7 +76,7 @@ class Signup extends React.Component<Props, any> {
   render() {
     return (
       <div>
-        <h3 className="title">Signup</h3>
+        <h3 >Signup</h3>
         <Form
           inline
           onSubmit={(e) => {
@@ -81,21 +86,24 @@ class Signup extends React.Component<Props, any> {
         >
           <FormGroup floating>
             <Input
-              type="text"
+              type="email"
               placeholder="Email"
               onChange={(e) => this.setState({ email: e.target.value })}
               value={this.state.email}
+              name="email"
             />
+            <Label for="exampleEmail">Email</Label>
           </FormGroup>{" "}
           <FormGroup floating>
             <Input
-              type="text"
+              type="password"
               placeholder="Password"
               onChange={(e) => this.setState({ password: e.target.value })}
               value={this.state.password}
               name="password"
             />
-          </FormGroup>
+            <Label for="examplePassword">Password</Label>
+          </FormGroup>{" "}
           <FormGroup floating>
             <FormText>
               <List className="password-list">
@@ -104,17 +112,15 @@ class Signup extends React.Component<Props, any> {
                 <li>A mixture of both uppercase and lowercase letters.</li>
                 <li>A mixture of letters and numbers.</li>
               </List>
-            </FormText>
+            </FormText>{" "}
             <FormFeedback>
-              {" "}
               {this.state.message !== "" ? <p>{this.state.message}</p> : ""}
             </FormFeedback>
           </FormGroup>{" "}
           <Button type="submit" disabled={!this.validPassword()}>
             Sign Up
-          </Button>
+          </Button>{" "}
           <FormFeedback>
-            {" "}
             {this.state.message !== "" ? (
               <p className="message">{this.state.message}</p>
             ) : (

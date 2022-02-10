@@ -1,13 +1,13 @@
 import React from "react";
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 import {
   Navbar,
   NavbarBrand,
   Nav,
   NavItem,
   Button,
-  NavbarToggler,
   Collapse,
+  // NavbarToggler,
 } from "reactstrap";
 
 interface Props {
@@ -15,10 +15,10 @@ interface Props {
   tokenUpdate: any;
 }
 
-class NavBar extends React.Component<Props, any> {
+class SiteBar extends React.Component<Props, any> {
   constructor(props: Props) {
     super(props);
-    this.toggle = this.toggle.bind(this);
+    // this.toggle = this.toggle.bind(this);
     this.state = {
       isOpen: false,
       hasError: false,
@@ -33,11 +33,11 @@ class NavBar extends React.Component<Props, any> {
     console.log(error, errorInfo);
   }
 
-  toggle = () => {
-    this.setState({
-      isOpen: !this.state.isOpen,
-    });
-  };
+  // toggle = () => {
+  //   this.setState({
+  //     isOpen: !this.state.isOpen,
+  //   });
+  // };
 
   componentDidMount = () => {};
 
@@ -49,9 +49,9 @@ class NavBar extends React.Component<Props, any> {
       <div>
         <Navbar color="faded" light expand="md">
           <NavbarBrand>Baker Helper</NavbarBrand>
-          <NavbarToggler size="sm" />
+          {/* <NavbarToggler onClick={toggle}/> */}
           <Collapse navbar>
-            <Nav className="ms-auto" navbar>
+            <Nav className="ml-auto" navbar>
               <NavItem>
                 <Button onClick={this.props.clickLogout}>Logout</Button>
               </NavItem>
@@ -63,4 +63,4 @@ class NavBar extends React.Component<Props, any> {
   }
 }
 
-export default NavBar;
+export default SiteBar;
