@@ -2,8 +2,9 @@ import React from "react";
 import SiteBar from "../Auth/SiteBar";
 import CreateClient from "./CreateClient";
 import ClientTable from "./ClientTable";
+import ClientUpdate from "./ClientUpdate";
 import { Container, Row, Col } from "reactstrap";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 
 interface Props {
   token: string;
@@ -12,6 +13,7 @@ interface Props {
 }
 
 export interface Clients {
+  id: string;
   firstName: string;
   lastName: string;
   phoneNumber: string;
@@ -25,14 +27,15 @@ class ClientIndex extends React.Component<Props, any> {
     this.state = {
       clients: [],
       error: false,
-      // updateActive: false,
-      // postToUpdate: {}
+      updateActive: false,
+      editClients: {},
     };
   }
 
   componentDidMount() {
     this.fetchClients();
   }
+
   //Get all clients
   fetchClients = () => {
     console.log("fetch Clients", this.props.token);
@@ -55,32 +58,28 @@ class ClientIndex extends React.Component<Props, any> {
       );
   };
 
-  //   updateClient = (client: Clients) => {
-  //     this.setState({
-  //         updateClient: client,
-  //     })
-  //     console.log(this.state.updateClient);
-  // }
+  editUpdateClient = (client: Clients) => {
+    this.setState({
+      editClients: client,
+    });
+    console.log(this.state.editClients);
+  };
 
-  // updateOn = () => {
-  //     this.setState({
-  //         updateActive: true
-  //     })
-  // }
+  updateOn = () => {
+    this.setState({
+      updateActive: true,
+    });
+  };
 
-  // updateOff = () => {
-  //     this.setState({
-  //         updateActive: false
-  //     })
-  // }
+  updateOff = () => {
+    this.setState({
+      updateActive: false,
+    });
+  };
 
-  // setClient = (searchItem: string) => {
-  //     let filtered = this.state.clients.filter((i:Clients) => i.firstName.includes(searchItem))
-  //     this.setState({clients: filtered})
-  // }
   render() {
     console.log("ClientIndex render");
-    console.log(this.state)
+    console.log(this.state);
     return (
       <div>
         <SiteBar
@@ -100,8 +99,20 @@ class ClientIndex extends React.Component<Props, any> {
                 clientArray={this.state.clients}
                 fetch={this.fetchClients}
                 token={this.props.token}
+                editUpdateClient={this.editUpdateClient}
+                updateOn={this.updateOn}
               />
             </Col>
+            {this.state.updateActive ? (
+              <ClientUpdate
+                editClients={this.state.editClients}
+                updateOff={this.updateOff}
+                token={this.props.token}
+                fetch={this.fetchClients}
+              />
+            ) : (
+              <></>
+            )}
           </Row>
         </Container>
       </div>

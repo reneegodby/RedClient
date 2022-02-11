@@ -7,8 +7,8 @@ type Props = {
   fetch: () => void;
   clientArray: object[];
   token: string;
-  // editClient: (post: Clients) => void,
-  // updateOn: () => void
+  editUpdateClient: (client: Clients) => void;
+  updateOn: () => void;
 };
 
 class ClientTable extends React.Component<Props, any> {
@@ -25,13 +25,13 @@ class ClientTable extends React.Component<Props, any> {
   //Delete Client
   deleteClient = (client: Clients) => {
     console.log(client);
-    fetch(`http://localhost:5001/clients/delete/${client}`, {
+    fetch(`http://localhost:5001/clients/delete/${client.id}`, {
       method: "DELETE",
       headers: new Headers({
         "Content-Type": "application/json",
         Authorization: `${this.props.token}`,
       }),
-    }).then((client) => this.props.fetch());
+    }).then(() => this.props.fetch());
   };
 
   componentDidMount() {
@@ -43,6 +43,7 @@ class ClientTable extends React.Component<Props, any> {
     console.log(this.props.clientArray);
 
     return this.props.clientArray.map((client: any, index: number) => {
+      index += 1;
       return (
         <Table bordered responsive striped>
           <thead>
@@ -57,14 +58,22 @@ class ClientTable extends React.Component<Props, any> {
           </thead>
           <tbody>
             <tr>
-              <td>{client.id}</td>
+              <td>{index}</td>
               <td>{client.firstName}</td>
               <td>{client.lastName}</td>
               <td>{client.phoneNumber}</td>
               <td>{client.address}</td>
               <td>{client.notes}</td>
 
-              <Button size="sm">Edit</Button>
+              <Button
+                size="sm"
+                onClick={() => {
+                  this.props.editUpdateClient(client);
+                  this.props.updateOn();
+                }}
+              >
+                Update
+              </Button>
 
               <Button
                 size="sm"
@@ -72,7 +81,7 @@ class ClientTable extends React.Component<Props, any> {
                   this.deleteClient(client);
                 }}
               >
-                Delete
+                Delete{" "}
               </Button>
             </tr>
           </tbody>

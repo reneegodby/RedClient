@@ -17,9 +17,9 @@ Client:
 - [2/5/22]: created file structure
 - [2/5/22]: created signup component
 - [2/5/22]: created login component
-- []: 
-- []: 
-- []: 
+- [2/8/22]: tested and made components functional 
+- [2/9/22]: created client table 
+- [2/10/22]: added update and delete functions 
 - []: 
 - []: 
 - []: 
