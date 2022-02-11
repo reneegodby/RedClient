@@ -49,8 +49,8 @@ class CreateClient extends React.Component<Props, any> {
         res.json();
         console.log(res);
       })
-      .then((postData) => {
-        console.log(postData);
+      .then((clientData) => {
+        console.log(clientData);
         this.setState({
           firstName: "",
           lastName: "",

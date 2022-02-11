@@ -1,8 +1,8 @@
 import React from "react";
 import SiteBar from "../Auth/SiteBar";
-import CreateClient from "./CreateClient";
-import ClientTable from "./ClientTable";
-import ClientUpdate from "./ClientUpdate";
+import CreateOrder from "./CreateOrder";
+import OrderTable from "./OrderTable";
+import OrderUpdate from "./OrderUpdate";
 import { Container, Row, Col } from "reactstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -12,34 +12,35 @@ interface Props {
   tokenUpdate: any;
 }
 
-export interface Clients {
-  id: string;
-  firstName: string;
-  lastName: string;
-  phoneNumber: string;
-  address: string;
+export interface Orders {
+  orderId: string;
+  typeOfOrder: string;
+  quantity: string;
+  dueDate: string;
+  price: string;
   notes: string;
+  image: string;
 }
 
-class ClientIndex extends React.Component<Props, any> {
+class OrderIndex extends React.Component<Props, any> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      clients: [],
+      orders: [],
       error: false,
       updateActive: false,
-      editClients: {},
+      editOrders: {},
     };
   }
 
   componentDidMount() {
-    this.fetchClients();
+    this.fetchOrders();
   }
 
-  //Get all clients
-  fetchClients = () => {
-    console.log("fetch Clients", this.props.token);
-    fetch(`http://localhost:5001/clients`, {
+  //Get all orders
+  fetchOrders = () => {
+    console.log("fetch Orders", this.props.token);
+    fetch(`http://localhost:5001/orders`, {
       method: "GET",
       headers: new Headers({
         "Content-Type": "application/json",
@@ -47,9 +48,9 @@ class ClientIndex extends React.Component<Props, any> {
       }),
     })
       .then((res) => res.json())
-      .then((clientData) => {
-        this.setState({ clients: clientData });
-        console.log(clientData);
+      .then((orderData) => {
+        this.setState({ orders: orderData });
+        console.log(orderData);
       })
       .catch((error) =>
         this.setState({
@@ -58,11 +59,11 @@ class ClientIndex extends React.Component<Props, any> {
       );
   };
 
-  editUpdateClient = (client: Clients) => {
+  editUpdateOrder = (order: Orders) => {
     this.setState({
-      editClients: client,
+      editOrders: order,
     });
-    console.log(this.state.editClients);
+    console.log(this.state.editOrders);
   };
 
   updateOn = () => {
@@ -78,7 +79,7 @@ class ClientIndex extends React.Component<Props, any> {
   };
 
   render() {
-    console.log("ClientIndex render");
+    console.log("OrderIndex render");
     console.log(this.state);
     return (
       <div>
@@ -89,26 +90,23 @@ class ClientIndex extends React.Component<Props, any> {
         <Container>
           <Row>
             <Col md="3">
-              <CreateClient
-                token={this.props.token}
-                fetch={this.fetchClients}
-              />
+              <CreateOrder token={this.props.token} fetch={this.fetchOrders} />
             </Col>
             <Col md="9">
-              <ClientTable
-                clientArray={this.state.clients}
-                fetch={this.fetchClients}
+              <OrderTable
+                orderArray={this.state.orders}
+                fetch={this.fetchOrders}
                 token={this.props.token}
-                editUpdateClient={this.editUpdateClient}
+                editUpdateOrder={this.editUpdateOrder}
                 updateOn={this.updateOn}
               />
             </Col>
             {this.state.updateActive ? (
-              <ClientUpdate
-                editClients={this.state.editClients}
+              <OrderUpdate
+                editOrders={this.state.editOrders}
                 updateOff={this.updateOff}
                 token={this.props.token}
-                fetch={this.fetchClients}
+                fetch={this.fetchOrders}
               />
             ) : (
               <></>
@@ -120,4 +118,4 @@ class ClientIndex extends React.Component<Props, any> {
   }
 }
 
-export default ClientIndex;
+export default OrderIndex;

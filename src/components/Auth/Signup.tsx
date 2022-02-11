@@ -61,6 +61,7 @@ class Signup extends React.Component<Props, any> {
       .then((data) => {
         console.log(data);
         this.props.update(data.sessionToken);
+        console.log(data.sessionToken);
       });
   };
   validPassword = () => {
