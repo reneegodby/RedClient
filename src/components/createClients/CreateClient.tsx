@@ -2,7 +2,7 @@ import APIURL from "../../helpers/environment";
 import React from "react";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 
 type Props = {
   token: string;
@@ -31,8 +31,8 @@ class CreateClient extends React.Component<Props, any> {
       this.state.notes
     );
     // fetch("http://localhost:5001/clients/client", {
-      fetch(`${APIURL}/clients/client`, {       /*Heroku */
-      method: "POST",
+    fetch(`${APIURL}/clients/client`, {
+      /*Heroku */ method: "POST",
       body: JSON.stringify({
         clients: {
           firstName: this.state.firstName,
@@ -44,7 +44,7 @@ class CreateClient extends React.Component<Props, any> {
       }),
       headers: new Headers({
         "Content-Type": "application/json",
-        Authorization: `${this.props.token}`,
+        "Authorization": `${this.props.token}`,
       }),
     })
       .then((res) => {

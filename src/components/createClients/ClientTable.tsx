@@ -31,7 +31,7 @@ class ClientTable extends React.Component<Props, any> {
       method: "DELETE",
       headers: new Headers({
         "Content-Type": "application/json",
-        Authorization: `${this.props.token}`,
+        "Authorization": `${this.props.token}`,
       }),
     }).then(() => this.props.fetch());
   };

@@ -47,7 +47,7 @@ class CreateOrder extends React.Component<Props, any> {
       }),
       headers: new Headers({
         "Content-Type": "application/json",
-        Authorization: `${this.props.token}`,
+        "Authorization": `${this.props.token}`,
       }),
     })
       .then((res) => {
