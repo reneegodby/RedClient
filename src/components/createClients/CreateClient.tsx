@@ -31,7 +31,7 @@ class CreateClient extends React.Component<Props, any> {
       this.state.notes
     );
     // fetch("http://localhost:5001/clients/client", {
-      fetch(`${APIURL}/clients/client`, {       /*Heroku */
+      fetch(`${APIURL}clients/client`, {       /*Heroku */
       method: "POST",
       body: JSON.stringify({
         clients: {
