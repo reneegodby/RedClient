@@ -41,7 +41,7 @@ class ClientIndex extends React.Component<Props, any> {
   fetchClients = () => {
     console.log("fetch Clients", this.props.token);
     // fetch(`http://localhost:5001/clients`, {
-      fetch(`${APIURL}clients`, {       /*Heroku */
+      fetch(`${APIURL}/clients`, {       /*Heroku */
       method: "GET",
       headers: new Headers({
         "Content-Type": "application/json",

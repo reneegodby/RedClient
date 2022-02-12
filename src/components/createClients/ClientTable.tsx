@@ -27,7 +27,7 @@ class ClientTable extends React.Component<Props, any> {
   deleteClient = (client: Clients) => {
     console.log(client);
     // fetch(`http://localhost:5001/clients/delete/${client.id}`, {
-      fetch(`${APIURL}clients/delete/${client.id}`, {       /*Heroku */
+      fetch(`${APIURL}/clients/delete/${client.id}`, {       /*Heroku */
       method: "DELETE",
       headers: new Headers({
         "Content-Type": "application/json",

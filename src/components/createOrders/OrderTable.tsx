@@ -27,7 +27,7 @@ class OrderTable extends React.Component<Props, any> {
   deleteOrder = (order: Orders) => {
     console.log(order);
     // fetch(`http://localhost:5001/orders/delete/${order}`, {
-      fetch(`${APIURL}orders/delete/${order}`, {       /*Heroku */
+      fetch(`${APIURL}/orders/delete/${order}`, {       /*Heroku */
       method: "DELETE",
       headers: new Headers({
         "Content-Type": "application/json",
