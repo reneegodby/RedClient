@@ -1,3 +1,4 @@
+import APIURL from "../../helpers/environment";
 import React from "react";
 import { Button, Table, Row } from "reactstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -25,7 +26,8 @@ class OrderTable extends React.Component<Props, any> {
   //Delete Order
   deleteOrder = (order: Orders) => {
     console.log(order);
-    fetch(`http://localhost:5001/orders/delete/${order}`, {
+    // fetch(`http://localhost:5001/orders/delete/${order}`, {
+      fetch(`${APIURL}/orders/delete/${order}`, {       /*Heroku */
       method: "DELETE",
       headers: new Headers({
         "Content-Type": "application/json",

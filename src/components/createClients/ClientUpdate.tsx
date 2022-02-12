@@ -1,3 +1,4 @@
+import APIURL from "../../helpers/environment";
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Clients } from "./ClientIndex";
@@ -34,7 +35,8 @@ class ClientUpdate extends React.Component<Props, any> {
   componentDidMount = () => {};
 
   updateClient = () => {
-    fetch(`http://localhost:5001/clients/update/${this.props.editClients.id}`, {
+    // fetch(`http://localhost:5001/clients/update/${this.props.editClients.id}`, {
+      fetch(`${APIURL}/clients/update/${this.props.editClients.id}`, {       /*Heroku */
       method: "PUT",
       body: JSON.stringify({
         clients: {

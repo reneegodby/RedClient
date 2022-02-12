@@ -1,3 +1,4 @@
+import APIURL from "../../helpers/environment";
 import React from "react";
 import SiteBar from "../Auth/SiteBar";
 import CreateOrder from "./CreateOrder";
@@ -40,7 +41,8 @@ class OrderIndex extends React.Component<Props, any> {
   //Get all orders
   fetchOrders = () => {
     console.log("fetch Orders", this.props.token);
-    fetch(`http://localhost:5001/orders`, {
+    // fetch(`http://localhost:5001/orders`, {
+      fetch(`${APIURL}/orders`, {       /*Heroku */
       method: "GET",
       headers: new Headers({
         "Content-Type": "application/json",

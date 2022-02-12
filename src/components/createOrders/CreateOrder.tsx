@@ -1,3 +1,4 @@
+import APIURL from "../../helpers/environment";
 import React from "react";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 
@@ -31,7 +32,8 @@ class CreateOrder extends React.Component<Props, any> {
       this.state.notes,
       this.state.image
     );
-    fetch("http://localhost:5001/orders/order/cd6c2097-5dc0-4998-92be-c31ecb4f795c", {
+    // fetch("http://localhost:5001/orders/order/:id", {
+      fetch(`${APIURL}/orders/order/:id`, {       /*Heroku */
       method: "POST",
       body: JSON.stringify({
         orders: {

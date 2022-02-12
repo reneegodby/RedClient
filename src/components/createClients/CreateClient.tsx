@@ -1,3 +1,4 @@
+import APIURL from "../../helpers/environment";
 import React from "react";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 
@@ -29,7 +30,8 @@ class CreateClient extends React.Component<Props, any> {
       this.state.address,
       this.state.notes
     );
-    fetch("http://localhost:5001/clients/client", {
+    // fetch("http://localhost:5001/clients/client", {
+      fetch(`${APIURL}/clients/client`, {       /*Heroku */
       method: "POST",
       body: JSON.stringify({
         clients: {

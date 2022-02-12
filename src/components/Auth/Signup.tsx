@@ -1,3 +1,4 @@
+import APIURL from "../../helpers/environment";
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {
@@ -30,7 +31,8 @@ class Signup extends React.Component<Props, any> {
   handleSubmit = () => {
     let errorCode: number | string;
     console.log(this.state.email, this.state.password);
-    fetch(`http://localhost:5001/auth/signup`, {
+    // fetch(`http://localhost:5001/auth/signup`, {     Local
+      fetch(`${APIURL}/auth/signup`, {       /*Heroku */
       method: "POST",
       body: JSON.stringify({
         user: {

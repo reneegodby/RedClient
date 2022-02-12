@@ -1,13 +1,10 @@
+// import APIURL from './helpers/environment'
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import Auth from "./components/Auth/Auth";
 import ClientIndex from "./components/createClients/ClientIndex";
 import OrderIndex from "./components/createOrders/OrderIndex";
-// import NavBar from "./components/Auth/NavBar";
 
-// export type Props = {
-//   tokenUpdate: any;
-// };
 
 const App: React.FunctionComponent = () => {
   const [sessionToken, setSessionToken] = useState<any>("");

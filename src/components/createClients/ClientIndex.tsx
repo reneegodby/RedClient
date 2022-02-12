@@ -1,3 +1,4 @@
+import APIURL from "../../helpers/environment";
 import React from "react";
 import SiteBar from "../Auth/SiteBar";
 import CreateClient from "./CreateClient";
@@ -39,7 +40,8 @@ class ClientIndex extends React.Component<Props, any> {
   //Get all clients
   fetchClients = () => {
     console.log("fetch Clients", this.props.token);
-    fetch(`http://localhost:5001/clients`, {
+    // fetch(`http://localhost:5001/clients`, {
+      fetch(`${APIURL}/clients`, {       /*Heroku */
       method: "GET",
       headers: new Headers({
         "Content-Type": "application/json",
