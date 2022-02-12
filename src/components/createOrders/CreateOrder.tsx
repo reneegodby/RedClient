@@ -33,7 +33,7 @@ class CreateOrder extends React.Component<Props, any> {
       this.state.image
     );
     // fetch("http://localhost:5001/orders/order/:id", {
-      fetch(`${APIURL}/orders/order/:id`, {       /*Heroku */
+      fetch(`${APIURL}orders/order/:id`, {       /*Heroku */
       method: "POST",
       body: JSON.stringify({
         orders: {

@@ -37,7 +37,7 @@ class OrderUpdate extends React.Component<Props, any> {
 
   updateOrder = () => {
     // fetch(`http://localhost:5001/orders/update/${this.props.editOrders}`, {
-      fetch(`${APIURL}/orders/update/${this.props.editOrders}`, {       /*Heroku */
+      fetch(`${APIURL}orders/update/${this.props.editOrders}`, {       /*Heroku */
       method: "PUT",
       body: JSON.stringify({
         orders: {
