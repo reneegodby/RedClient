@@ -33,8 +33,8 @@ class CreateOrder extends React.Component<Props, any> {
       this.state.image
     );
     // fetch("http://localhost:5001/orders/order/:id", {
-      fetch(`${APIURL}/orders/order/:id`, {       /*Heroku */
-      method: "POST",
+    fetch(`${APIURL}/orders/order/:id`, {
+      /*Heroku */ method: "POST",
       body: JSON.stringify({
         orders: {
           typeOfOrder: this.state.typeOfOrder,
@@ -47,7 +47,7 @@ class CreateOrder extends React.Component<Props, any> {
       }),
       headers: new Headers({
         "Content-Type": "application/json",
-        "Authorization": `${this.props.token}`,
+        Authorization: `${this.props.token}`,
       }),
     })
       .then((res) => {

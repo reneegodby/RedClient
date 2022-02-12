@@ -42,11 +42,11 @@ class OrderIndex extends React.Component<Props, any> {
   fetchOrders = () => {
     console.log("fetch Orders", this.props.token);
     // fetch(`http://localhost:5001/orders`, {
-      fetch(`${APIURL}/orders`, {       /*Heroku */
-      method: "GET",
+    fetch(`${APIURL}/orders`, {
+      /*Heroku */ method: "GET",
       headers: new Headers({
         "Content-Type": "application/json",
-        "Authorization": `${this.props.token}`,
+        Authorization: `${this.props.token}`,
       }),
     })
       .then((res) => res.json())

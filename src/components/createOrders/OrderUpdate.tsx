@@ -37,8 +37,8 @@ class OrderUpdate extends React.Component<Props, any> {
 
   updateOrder = () => {
     // fetch(`http://localhost:5001/orders/update/${this.props.editOrders}`, {
-      fetch(`${APIURL}/orders/update/${this.props.editOrders}`, {       /*Heroku */
-      method: "PUT",
+    fetch(`${APIURL}/orders/update/${this.props.editOrders}`, {
+      /*Heroku */ method: "PUT",
       body: JSON.stringify({
         orders: {
           typeOfOrder: this.state.editTypeOfOrder,
@@ -51,7 +51,7 @@ class OrderUpdate extends React.Component<Props, any> {
       }),
       headers: new Headers({
         "Content-Type": "application/json",
-        "Authorization": `${this.props.token}`,
+        Authorization: `${this.props.token}`,
       }),
     }).then((res) => {
       this.props.fetch();
