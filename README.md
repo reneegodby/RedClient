@@ -20,8 +20,8 @@ Client:
 - [2/8/22]: tested and made components functional 
 - [2/9/22]: created client table 
 - [2/10/22]: added update and delete functions 
-- []: 
-- []: 
+- [2/10/22]: created all order components
+- [2/11/22]: displayed both client and order components
 - []: 
 - []: 
 - []: 
