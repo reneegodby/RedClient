@@ -8,6 +8,6 @@ switch (window.location.hostname) {
         APIURL = 'https://rg-bakerhelper.herokuapp.com' 
 }
 
-// APIURL = "http://localhost:5001/";
+
 
 export default APIURL;

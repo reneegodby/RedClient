@@ -4,10 +4,20 @@ import "./App.css";
 import Auth from "./components/Auth/Auth";
 import ClientIndex from "./components/createClients/ClientIndex";
 import OrderIndex from "./components/createOrders/OrderIndex";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Orders } from "./components/createOrders/OrderIndex";
+import CreateOrder from "./components/createOrders/CreateOrder";
 
+export interface AppProps {
+  createOrder: string;
+  setCreateOrder: (createOrder: string) => void;
+}
 
 const App: React.FunctionComponent = () => {
-  const [sessionToken, setSessionToken] = useState<any>("");
+  const [sessionToken, setSessionToken] = useState<string>("");
+
+  const [createOrder, setCreateOrder] = useState<string>("");
+  const [clientId, setClientId] = useState<string>("");
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
@@ -27,27 +37,37 @@ const App: React.FunctionComponent = () => {
     setSessionToken("");
   };
 
-  const protectedViews = () => {
-    return sessionToken === localStorage.getItem("token") ? (
-      <>
-      <ClientIndex
-     token={sessionToken}
-       clickLogout={clearToken}
-       tokenUpdate={updateToken}
-     />
-     <OrderIndex
-       token={sessionToken}
-       clickLogout={clearToken}
-       tokenUpdate={updateToken}
-     />
-      
-      </>
-    ) : (
-      <Auth updateToken={updateToken} />
-    );
-  };
-
-  return <div className="App">{protectedViews()}</div>;
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Auth updateToken={updateToken} />} />
+        <Route
+          path="/clients"
+          element={
+            <ClientIndex
+              token={sessionToken}
+              clickLogout={clearToken}
+              tokenUpdate={updateToken}
+              clientId={clientId}
+              setClientId={setClientId}
+              createOrder={createOrder}
+              setCreateOrder={setCreateOrder}
+            />
+          }
+        />
+        <Route
+          path="/orders"
+          element={
+            <OrderIndex
+              token={sessionToken}
+              clickLogout={clearToken}
+              tokenUpdate={updateToken}
+            />
+          }
+        />
+      </Routes>
+    </BrowserRouter>
+  );
 };
 
 export default App;

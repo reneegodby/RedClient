@@ -3,6 +3,10 @@ import React from "react";
 import { Button, Table, Row } from "reactstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Clients } from "./ClientIndex";
+import {Orders} from "../createOrders/OrderIndex";
+import {ClientIndexProps} from "../createClients/ClientIndex"
+import CreateOrder from "../createOrders/CreateOrder";
+// import { Navigate } from "react-router-dom";
 
 type Props = {
   fetch: () => void;
@@ -10,6 +14,8 @@ type Props = {
   token: string;
   editUpdateClient: (client: Clients) => void;
   updateOn: () => void;
+  createOrder: ClientIndexProps['createOrder'];
+  setCreateOrder: ClientIndexProps['setCreateOrder'];
 };
 
 class ClientTable extends React.Component<Props, any> {
@@ -26,9 +32,8 @@ class ClientTable extends React.Component<Props, any> {
   //Delete Client
   deleteClient = (client: Clients) => {
     console.log(client);
-    // fetch(`http://localhost:5001/clients/delete/${client.id}`, {
     fetch(`${APIURL}/clients/delete/${client.id}`, {
-      /*Heroku */ method: "DELETE",
+      method: "DELETE",
       headers: new Headers({
         "Content-Type": "application/json",
         Authorization: `${this.props.token}`,
@@ -38,6 +43,15 @@ class ClientTable extends React.Component<Props, any> {
 
   componentDidMount() {
     this.props.fetch();
+    this.setState({
+      _isMounted: true,
+    });
+  }
+
+  componentWillUnmount() {
+    this.setState({
+      _isMounted: false,
+    });
   }
 
   clientMapper = () => {
@@ -45,12 +59,10 @@ class ClientTable extends React.Component<Props, any> {
     console.log(this.props.clientArray);
 
     return this.props.clientArray.map((client: any, index: number) => {
-      index += 1;
       return (
         <Table bordered responsive striped>
           <thead>
             <tr key={index}>
-              <th>ID# </th>
               <th>First Name</th>
               <th>Last Name</th>
               <th>Phone Number</th>
@@ -60,7 +72,6 @@ class ClientTable extends React.Component<Props, any> {
           </thead>
           <tbody>
             <tr>
-              <td>{index}</td>
               <td>{client.firstName}</td>
               <td>{client.lastName}</td>
               <td>{client.phoneNumber}</td>
@@ -85,6 +96,15 @@ class ClientTable extends React.Component<Props, any> {
               >
                 Delete{" "}
               </Button>
+              <Button
+                size="sm"
+                onClick={() => {
+                  this.props.setCreateOrder(client.id);
+                  console.log(client.id);
+                }}
+              >
+                Create Order
+              </Button>
             </tr>
           </tbody>
         </Table>
@@ -98,6 +118,8 @@ class ClientTable extends React.Component<Props, any> {
     return (
       <div>
         <Row>{this.clientMapper()}</Row>
+        {/* <Navigate to='[route endpoint]' replace={true} /> */}
+        {/* <a href="http://locahost:3000"></a> */}
       </div>
     );
   }

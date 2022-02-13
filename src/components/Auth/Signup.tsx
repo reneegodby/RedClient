@@ -11,6 +11,7 @@ import {
   FormText,
   List,
 } from "reactstrap";
+import { Navigate } from "react-router-dom";
 
 type Props = {
   update: any;
@@ -20,19 +21,31 @@ class Signup extends React.Component<Props, any> {
   constructor(props: Props) {
     super(props);
     this.state = {
+      role: "user",
       email: "",
       password: "",
-      role: "user",
       message: "",
+      responseCode: 0,
+      _isMounted: false,
     };
   }
-  componentDidMount = () => {};
+  componentDidMount = () => {
+    this.setState({
+      _isMounted: true,
+    });
+  };
+
+  componentWillUnmount() {
+    this.setState({
+      _isMounted: false,
+    });
+  }
 
   handleSubmit = () => {
     let errorCode: number | string;
     console.log(this.state.email, this.state.password);
-    // fetch(`http://localhost:5001/auth/signup`, {     Local
-      fetch(`${APIURL}/auth/signup`, {       /*Heroku */
+    
+    fetch(`${APIURL}/auth/signup`, {
       method: "POST",
       body: JSON.stringify({
         user: {
@@ -43,12 +56,13 @@ class Signup extends React.Component<Props, any> {
       }),
       headers: new Headers({
         "Content-Type": "application/json",
+        Accept: "application/json",
       }),
     })
-      .then((response) => {
-        console.log(`fetch successful ${response}`);
-
-        errorCode = response.status;
+      .then((res) => {
+        console.log(`fetch successful ${res}`);
+        this.setState({ responseCode: res.status });
+        errorCode = res.status;
         console.log(errorCode);
 
         if (errorCode === 409) {
@@ -58,7 +72,7 @@ class Signup extends React.Component<Props, any> {
           this.setState({ message: "User failed to register" });
           console.log(this.state.message);
         }
-        return response.json();
+        return res.json();
       })
       .then((data) => {
         console.log(data);
@@ -79,7 +93,7 @@ class Signup extends React.Component<Props, any> {
   render() {
     return (
       <div>
-        <h3 >Signup</h3>
+        <h3>Signup</h3>
         <Form
           inline
           onSubmit={(e) => {
@@ -131,6 +145,9 @@ class Signup extends React.Component<Props, any> {
             )}
           </FormFeedback>
         </Form>
+        {this.state.responseCode === 201 && (
+          <Navigate to="/clients" replace={true} />
+        )}
       </div>
     );
   }

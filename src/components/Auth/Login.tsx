@@ -1,35 +1,50 @@
 import APIURL from "../../helpers/environment";
 import React from "react";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { Form, FormGroup, Input, Button, Label } from "reactstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
+import {
+  Form,
+  FormGroup,
+  Input,
+  Button,
+  Label,
+  FormFeedback,
+} from "reactstrap";
+import { Navigate } from "react-router-dom";
 
 type Props = {
-  updateToken: any;
+  update: any;
 };
-
-type State = {
-  role: string;
-  email: string;
-  password: string;
-  sessionToken: any;
-};
-
-class Login extends React.Component<Props, State> {
+class Login extends React.Component<Props, any> {
   constructor(props: Props) {
     super(props);
     this.state = {
       role: "user",
       email: "",
       password: "",
+      message: "",
+      responseCode: 0,
+      _isMounted: false,
       sessionToken: "",
     };
   }
+  componentDidMount = () => {
+    this.setState({
+      _isMounted: true,
+    });
+  };
+
+  componentWillUnmount() {
+    this.setState({
+      _isMounted: false,
+    });
+  }
 
   handleSubmit = () => {
+    let errorCode: number | string;
     console.log("login handle");
     console.log(this.state.email, this.state.password);
-    // fetch("http://localhost:5001/auth/login", {
-      fetch(`${APIURL}/auth/login`, {       /*Heroku */
+    
+    fetch(`${APIURL}/auth/login`, {
       method: "POST",
       body: JSON.stringify({
         user: {
@@ -40,15 +55,29 @@ class Login extends React.Component<Props, State> {
       }),
       headers: new Headers({
         "Content-Type": "application/json",
+        Accept: "application/json",
       }),
     })
-      .then((response) => response.json())
+      .then((res) => {
+        console.log(`fetch successful ${res}`);
+        this.setState({ responseCode: res.status });
+        errorCode = res.status;
+        console.log(errorCode);
+
+        if (errorCode === 409) {
+          this.setState({ message: "Something is wrong" });
+          console.log(this.state.message);
+        } else if (errorCode === 500) {
+          this.setState({ message: "User failed to login" });
+          console.log(this.state.message);
+        }
+        return res.json();
+      })
       .then((data) => {
         console.log(data);
-        console.log(this.props.updateToken);
-        this.props.updateToken(data.sessionToken);
-      })
-      .catch((e) => console.log(e));
+        this.props.update(data.sessionToken);
+        console.log(data.sessionToken);
+      });
   };
 
   render() {
@@ -57,7 +86,7 @@ class Login extends React.Component<Props, State> {
       <div>
         <h3>Login</h3>
         <Form
-        inline
+          inline
           onSubmit={(e) => {
             e.preventDefault();
             this.handleSubmit();
@@ -71,7 +100,7 @@ class Login extends React.Component<Props, State> {
               value={this.state.email}
               name="email"
             />
-          <Label for="exampleEmail">Email</Label>
+            <Label for="exampleEmail">Email</Label>
           </FormGroup>
           <FormGroup floating>
             <Input
@@ -81,10 +110,16 @@ class Login extends React.Component<Props, State> {
               value={this.state.password}
               name="password"
             />
-             <Label for="examplePassword">Password</Label>
+            <Label for="examplePassword">Password</Label>
+            <FormFeedback>
+              {this.state.message !== "" ? <p>{this.state.message}</p> : ""}
+            </FormFeedback>
           </FormGroup>
           <Button type="submit">Login</Button>
         </Form>
+        {this.state.responseCode === 200 && (
+          <Navigate to="/clients" replace={true} />
+        )}
       </div>
     );
   }

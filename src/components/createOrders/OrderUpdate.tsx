@@ -33,12 +33,21 @@ class OrderUpdate extends React.Component<Props, any> {
     };
   }
 
-  componentDidMount = () => {};
+  componentDidMount() {
+    this.setState({
+     _isMounted: true,
+   });
+ }
+
+ componentWillUnmount() {
+   this.setState({
+     _isMounted: false,
+   });
+ } 
 
   updateOrder = () => {
-    // fetch(`http://localhost:5001/orders/update/${this.props.editOrders}`, {
     fetch(`${APIURL}/orders/update/${this.props.editOrders}`, {
-      /*Heroku */ method: "PUT",
+      method: "PUT",
       body: JSON.stringify({
         orders: {
           typeOfOrder: this.state.editTypeOfOrder,

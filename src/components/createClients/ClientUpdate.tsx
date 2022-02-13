@@ -32,10 +32,20 @@ class ClientUpdate extends React.Component<Props, any> {
     };
   }
 
-  componentDidMount = () => {};
+  componentDidMount() {
+     this.setState({
+      _isMounted: true,
+    });
+  }
+
+  componentWillUnmount() {
+    this.setState({
+      _isMounted: false,
+    });
+  } 
 
   updateClient = () => {
-    // fetch(`http://localhost:5001/clients/update/${this.props.editClients.id}`, {
+    
     fetch(`${APIURL}/clients/update/${this.props.editClients.id}`, {
       /*Heroku */ method: "PUT",
       body: JSON.stringify({

@@ -5,14 +5,18 @@ import CreateClient from "./CreateClient";
 import ClientTable from "./ClientTable";
 import ClientUpdate from "./ClientUpdate";
 import { Container, Row, Col } from "reactstrap";
+import {Orders} from "../createOrders/OrderIndex";
 import "bootstrap/dist/css/bootstrap.min.css";
-
-interface Props {
+import {AppProps} from "../../../src/App"
+export interface ClientIndexProps {
   token: string;
-  clickLogout: any;
-  tokenUpdate: any;
+  clickLogout: () => void;
+  tokenUpdate: (newToken: string) => void;
+  clientId: string;
+  setClientId: (clientId: string) => void;
+  createOrder: AppProps['createOrder'];
+  setCreateOrder: AppProps['setCreateOrder'];
 }
-
 export interface Clients {
   id: string;
   firstName: string;
@@ -22,8 +26,8 @@ export interface Clients {
   notes: string;
 }
 
-class ClientIndex extends React.Component<Props, any> {
-  constructor(props: Props) {
+class ClientIndex extends React.Component<ClientIndexProps, any> {
+  constructor(props: ClientIndexProps) {
     super(props);
     this.state = {
       clients: [],
@@ -33,16 +37,12 @@ class ClientIndex extends React.Component<Props, any> {
     };
   }
 
-  componentDidMount() {
-    this.fetchClients();
-  }
-
   //Get all clients
   fetchClients = () => {
     console.log("fetch Clients", this.props.token);
-    // fetch(`http://localhost:5001/clients`, {
+
     fetch(`${APIURL}/clients`, {
-      /*Heroku */ method: "GET",
+      method: "GET",
       headers: new Headers({
         "Content-Type": "application/json",
         Authorization: `${this.props.token}`,
@@ -79,6 +79,18 @@ class ClientIndex extends React.Component<Props, any> {
     });
   };
 
+  componentDidMount() {
+    this.fetchClients();
+    this.setState({
+      _isMounted: true,
+    });
+  }
+
+  componentWillUnmount() {
+    this.setState({
+      _isMounted: false,
+    });
+  }
   render() {
     console.log("ClientIndex render");
     console.log(this.state);
@@ -103,6 +115,8 @@ class ClientIndex extends React.Component<Props, any> {
                 token={this.props.token}
                 editUpdateClient={this.editUpdateClient}
                 updateOn={this.updateOn}
+                createOrder={this.props.createOrder}
+                setCreateOrder={this.props.setCreateOrder}
               />
             </Col>
             {this.state.updateActive ? (

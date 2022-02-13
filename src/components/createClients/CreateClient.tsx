@@ -7,6 +7,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 type Props = {
   token: string;
   fetch: () => void;
+  // setClientId: (clientId: string) => void;
 };
 
 class CreateClient extends React.Component<Props, any> {
@@ -30,9 +31,9 @@ class CreateClient extends React.Component<Props, any> {
       this.state.address,
       this.state.notes
     );
-    // fetch("http://localhost:5001/clients/client", {
+
     fetch(`${APIURL}/clients/client`, {
-      /*Heroku */ method: "POST",
+      method: "POST",
       body: JSON.stringify({
         clients: {
           firstName: this.state.firstName,
@@ -63,6 +64,18 @@ class CreateClient extends React.Component<Props, any> {
         this.props.fetch();
       });
   };
+
+  componentDidMount() {
+    this.setState({
+      _isMounted: true,
+    });
+  }
+
+  componentWillUnmount() {
+    this.setState({
+      _isMounted: false,
+    });
+  }
 
   render() {
     return (

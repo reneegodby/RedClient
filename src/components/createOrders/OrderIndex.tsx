@@ -33,35 +33,30 @@ class OrderIndex extends React.Component<Props, any> {
       editOrders: {},
     };
   }
-
-  componentDidMount() {
-    this.fetchOrders();
-  }
-
   //Get all orders
   fetchOrders = () => {
     console.log("fetch Orders", this.props.token);
-    // fetch(`http://localhost:5001/orders`, {
+    
     fetch(`${APIURL}/orders`, {
-      /*Heroku */ method: "GET",
+      method: "GET",
       headers: new Headers({
         "Content-Type": "application/json",
         Authorization: `${this.props.token}`,
       }),
     })
-      .then((res) => res.json())
-      .then((orderData) => {
-        this.setState({ orders: orderData });
-        console.log(orderData);
+    .then((res) => res.json())
+    .then((orderData) => {
+      this.setState({ orders: orderData });
+      console.log(orderData);
       })
       .catch((error) =>
-        this.setState({
-          error: true,
-        })
+      this.setState({
+        error: true,
+      })
       );
-  };
+    };
 
-  editUpdateOrder = (order: Orders) => {
+    editUpdateOrder = (order: Orders) => {
     this.setState({
       editOrders: order,
     });
@@ -79,7 +74,20 @@ class OrderIndex extends React.Component<Props, any> {
       updateActive: false,
     });
   };
+  
+  componentDidMount() {
+    this.fetchOrders();
+    this.setState({
+      _isMounted: true,
+    });
+  }
 
+  componentWillUnmount() {
+    this.setState({
+      _isMounted: false,
+    });
+  }
+ 
   render() {
     console.log("OrderIndex render");
     console.log(this.state);

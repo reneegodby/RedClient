@@ -92,6 +92,9 @@ class OrderTable extends React.Component<Props, any> {
               >
                 Delete{" "}
               </Button>
+
+              
+              
             </tr>
           </tbody>
         </Table>

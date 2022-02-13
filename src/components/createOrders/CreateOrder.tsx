@@ -1,7 +1,15 @@
 import APIURL from "../../helpers/environment";
 import React from "react";
-import { Form, FormGroup, Label, Input, Button } from "reactstrap";
-
+import {
+  Modal,
+  ModalBody,
+  ModalHeader,
+  Form,
+  FormGroup,
+  Label,
+  Input,
+  Button,
+} from "reactstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 type Props = {
@@ -32,9 +40,9 @@ class CreateOrder extends React.Component<Props, any> {
       this.state.notes,
       this.state.image
     );
-    // fetch("http://localhost:5001/orders/order/:id", {
-    fetch(`${APIURL}/orders/order/:id`, {
-      /*Heroku */ method: "POST",
+
+    fetch(`${APIURL}/orders/order`, {
+      method: "POST",
       body: JSON.stringify({
         orders: {
           typeOfOrder: this.state.typeOfOrder,
@@ -68,80 +76,94 @@ class CreateOrder extends React.Component<Props, any> {
       });
   };
 
+  componentDidMount() {
+    this.setState({
+      _isMounted: true,
+    });
+  }
+
+  componentWillUnmount() {
+    this.setState({
+      _isMounted: false,
+    });
+  }
+
   render() {
     return (
-      <div>
-        <h2>Order Information</h2>
-        <Form
-          inline
-          onSubmit={(e) => {
-            e.preventDefault();
-            this.handleSubmit();
-          }}
-        >
-          <FormGroup>
-            <Label htmlFor="typeOfOrder">Type of Order: </Label>
-            <Input
-              name="typeOfOrder"
-              value={this.state.typeOfOrder}
-              onChange={(e) => this.setState({ typeOfOrder: e.target.value })}
-            >
-              {" "}
-            </Input>
-          </FormGroup>
-          <FormGroup>
-            <Label htmlFor="quantity">Quantity: </Label>
-            <Input
-              name="quantity"
-              value={this.state.quantity}
-              onChange={(e) => this.setState({ quantity: e.target.value })}
-            >
-              {" "}
-            </Input>
-          </FormGroup>
-          <FormGroup>
-            <Label htmlFor="dueDate">Due Date: </Label>
-            <Input
-              name="dueDate"
-              value={this.state.dueDate}
-              onChange={(e) => this.setState({ dueDate: e.target.value })}
-            >
-              {" "}
-            </Input>
-          </FormGroup>
-          <FormGroup>
-            <Label htmlFor="price">Price: </Label>
-            <Input
-              name="price"
-              value={this.state.price}
-              onChange={(e) => this.setState({ price: e.target.value })}
-            >
-              {" "}
-            </Input>
-          </FormGroup>
-          <FormGroup>
-            <Label htmlFor="notes">Notes: </Label>
-            <Input
-              name="notes"
-              value={this.state.notes}
-              onChange={(e) => this.setState({ notes: e.target.value })}
-            >
-              {" "}
-            </Input>
-          </FormGroup>
-          <FormGroup>
-            <Label htmlFor="image">Image: </Label>
-            <Input
-              name="image"
-              value={this.state.image}
-              onChange={(e) => this.setState({ image: e.target.value })}
-            >
-              {" "}
-            </Input>
-          </FormGroup>
-          <Button type="submit">Save</Button>
-        </Form>
-      </div>
+      <Modal isOpen={true}>
+        <ModalHeader>Create Order</ModalHeader>
+        <ModalBody>
+          <Form
+            inline
+            onSubmit={(e) => {
+              e.preventDefault();
+              // this.createOrder();
+            }}
+          >
+            <FormGroup>
+              <Label htmlFor="typeOfOrder">Type of Order: </Label>
+              <Input
+                name="typeOfOrder"
+                value={this.state.typeOfOrder}
+                onChange={(e) => this.setState({ typeOfOrder: e.target.value })}
+              >
+                {" "}
+              </Input>
+            </FormGroup>
+            <FormGroup>
+              <Label htmlFor="quantity">Quantity: </Label>
+              <Input
+                name="quantity"
+                value={this.state.quantity}
+                onChange={(e) => this.setState({ quantity: e.target.value })}
+              >
+                {" "}
+              </Input>
+            </FormGroup>
+            <FormGroup>
+              <Label htmlFor="dueDate">Due Date: </Label>
+              <Input
+                name="dueDate"
+                value={this.state.dueDate}
+                onChange={(e) => this.setState({ dueDate: e.target.value })}
+              >
+                {" "}
+              </Input>
+            </FormGroup>
+            <FormGroup>
+              <Label htmlFor="price">Price: </Label>
+              <Input
+                name="price"
+                value={this.state.price}
+                onChange={(e) => this.setState({ price: e.target.value })}
+              >
+                {" "}
+              </Input>
+            </FormGroup>
+            <FormGroup>
+              <Label htmlFor="notes">Notes: </Label>
+              <Input
+                name="notes"
+                value={this.state.notes}
+                onChange={(e) => this.setState({ notes: e.target.value })}
+              >
+                {" "}
+              </Input>
+            </FormGroup>
+            <FormGroup>
+              <Label htmlFor="image">Image: </Label>
+              <Input
+                name="image"
+                value={this.state.image}
+                onChange={(e) => this.setState({ image: e.target.value })}
+              >
+                {" "}
+              </Input>
+            </FormGroup>
+            <Button type="submit">Save</Button>
+          </Form>
+        </ModalBody>
+      </Modal>
     );
   }
 }
