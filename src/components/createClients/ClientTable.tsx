@@ -6,7 +6,7 @@ import { Clients } from "./ClientIndex";
 import {Orders} from "../createOrders/OrderIndex";
 import {ClientIndexProps} from "../createClients/ClientIndex"
 import CreateOrder from "../createOrders/CreateOrder";
-// import { Navigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 type Props = {
   fetch: () => void;
@@ -16,6 +16,7 @@ type Props = {
   updateOn: () => void;
   createOrder: ClientIndexProps['createOrder'];
   setCreateOrder: ClientIndexProps['setCreateOrder'];
+  openModal: () => void;
 };
 
 class ClientTable extends React.Component<Props, any> {
@@ -29,6 +30,7 @@ class ClientTable extends React.Component<Props, any> {
     };
   }
 
+ 
   //Delete Client
   deleteClient = (client: Clients) => {
     console.log(client);
@@ -100,6 +102,8 @@ class ClientTable extends React.Component<Props, any> {
                 size="sm"
                 onClick={() => {
                   this.props.setCreateOrder(client.id);
+                  this.props.openModal();
+                  
                   console.log(client.id);
                 }}
               >

@@ -11,12 +11,22 @@ import {
   Button,
 } from "reactstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { Navigate } from "react-router-dom";
 
 type Props = {
   token: string;
-  fetch: () => void;
 };
 
+export interface CreateOrdersState {
+  typeOfOrder: string;
+  quantity: string;
+  dueDate: string;
+  price: string;
+  notes: string;
+  image: string;
+  createOrder: string;
+  setCreateOrder: () => void;
+}
 class CreateOrder extends React.Component<Props, any> {
   constructor(props: Props) {
     super(props);
@@ -27,9 +37,18 @@ class CreateOrder extends React.Component<Props, any> {
       price: "",
       notes: "",
       image: "",
+      // createOrder: "",
+      // setCreateOrder: (createOrder: string),
     };
     console.log(this.props.token);
   }
+
+  //newOrder is changing the state of orderPg
+  newOrder = () => {
+    this.setState({
+      orderPg: !this.state.orderPg,
+    });
+  }; //when true: it will navigate to order pg
 
   handleSubmit = () => {
     console.log(
@@ -53,6 +72,7 @@ class CreateOrder extends React.Component<Props, any> {
           image: this.state.image,
         },
       }),
+
       headers: new Headers({
         "Content-Type": "application/json",
         Authorization: `${this.props.token}`,
@@ -72,7 +92,7 @@ class CreateOrder extends React.Component<Props, any> {
           notes: "",
           image: "",
         });
-        this.props.fetch();
+        this.newOrder(); //will create new order
       });
   };
 
@@ -163,6 +183,8 @@ class CreateOrder extends React.Component<Props, any> {
             <Button type="submit">Save</Button>
           </Form>
         </ModalBody>
+        {this.state.orderPg && <Navigate to="/orders" replace={true} />}
+        {/* Navigate to order pg if order created successfully */}
       </Modal>
     );
   }

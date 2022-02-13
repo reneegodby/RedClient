@@ -1,7 +1,6 @@
 import APIURL from "../../helpers/environment";
 import React from "react";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
-
 import "bootstrap/dist/css/bootstrap.min.css";
 
 type Props = {
@@ -9,6 +8,14 @@ type Props = {
   fetch: () => void;
   // setClientId: (clientId: string) => void;
 };
+
+type State = {
+  firstName: string,
+  lastName: string,
+  phoneNumber: string,
+  address: string,
+  notes: string,
+}
 
 class CreateClient extends React.Component<Props, any> {
   constructor(props: Props) {

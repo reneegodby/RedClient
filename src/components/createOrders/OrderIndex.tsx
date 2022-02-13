@@ -36,7 +36,7 @@ class OrderIndex extends React.Component<Props, any> {
   //Get all orders
   fetchOrders = () => {
     console.log("fetch Orders", this.props.token);
-    
+
     fetch(`${APIURL}/orders`, {
       method: "GET",
       headers: new Headers({
@@ -44,19 +44,19 @@ class OrderIndex extends React.Component<Props, any> {
         Authorization: `${this.props.token}`,
       }),
     })
-    .then((res) => res.json())
-    .then((orderData) => {
-      this.setState({ orders: orderData });
-      console.log(orderData);
+      .then((res) => res.json())
+      .then((orderData) => {
+        this.setState({ orders: orderData });
+        console.log(orderData);
       })
       .catch((error) =>
-      this.setState({
-        error: true,
-      })
+        this.setState({
+          error: true,
+        })
       );
-    };
+  };
 
-    editUpdateOrder = (order: Orders) => {
+  editUpdateOrder = (order: Orders) => {
     this.setState({
       editOrders: order,
     });
@@ -74,7 +74,7 @@ class OrderIndex extends React.Component<Props, any> {
       updateActive: false,
     });
   };
-  
+
   componentDidMount() {
     this.fetchOrders();
     this.setState({
@@ -87,7 +87,7 @@ class OrderIndex extends React.Component<Props, any> {
       _isMounted: false,
     });
   }
- 
+
   render() {
     console.log("OrderIndex render");
     console.log(this.state);
@@ -99,9 +99,6 @@ class OrderIndex extends React.Component<Props, any> {
         />
         <Container>
           <Row>
-            <Col md="3">
-              <CreateOrder token={this.props.token} fetch={this.fetchOrders} />
-            </Col>
             <Col md="9">
               <OrderTable
                 orderArray={this.state.orders}

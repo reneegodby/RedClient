@@ -18,6 +18,7 @@ type Props = {
   token: string;
   fetch: () => void;
   updateOff: () => void;
+  
 };
 
 class ClientUpdate extends React.Component<Props, any> {
@@ -33,7 +34,7 @@ class ClientUpdate extends React.Component<Props, any> {
   }
 
   componentDidMount() {
-     this.setState({
+    this.setState({
       _isMounted: true,
     });
   }
@@ -42,12 +43,11 @@ class ClientUpdate extends React.Component<Props, any> {
     this.setState({
       _isMounted: false,
     });
-  } 
+  }
 
   updateClient = () => {
-    
     fetch(`${APIURL}/clients/update/${this.props.editClients.id}`, {
-      /*Heroku */ method: "PUT",
+      method: "PUT",
       body: JSON.stringify({
         clients: {
           firstName: this.state.editFirstName,
@@ -66,6 +66,10 @@ class ClientUpdate extends React.Component<Props, any> {
       this.props.updateOff();
     });
   };
+  close = () => {
+    // this.props.modalOff();
+}
+
   render() {
     return (
       <Modal isOpen={true}>
@@ -136,6 +140,7 @@ class ClientUpdate extends React.Component<Props, any> {
             </FormGroup>
             <Button type="submit">Save</Button>
           </Form>
+          <Button onClick={this.close}>close</Button>
         </ModalBody>
       </Modal>
     );

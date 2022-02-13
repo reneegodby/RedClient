@@ -5,17 +5,17 @@ import CreateClient from "./CreateClient";
 import ClientTable from "./ClientTable";
 import ClientUpdate from "./ClientUpdate";
 import { Container, Row, Col } from "reactstrap";
-import {Orders} from "../createOrders/OrderIndex";
+import CreateOrder from "../createOrders/CreateOrder";
 import "bootstrap/dist/css/bootstrap.min.css";
-import {AppProps} from "../../../src/App"
+import { AppProps } from "../../../src/App";
 export interface ClientIndexProps {
   token: string;
   clickLogout: () => void;
   tokenUpdate: (newToken: string) => void;
   clientId: string;
   setClientId: (clientId: string) => void;
-  createOrder: AppProps['createOrder'];
-  setCreateOrder: AppProps['setCreateOrder'];
+  createOrder: AppProps["createOrder"];
+  setCreateOrder: AppProps["setCreateOrder"];
 }
 export interface Clients {
   id: string;
@@ -60,12 +60,25 @@ class ClientIndex extends React.Component<ClientIndexProps, any> {
       );
   };
 
+  
   editUpdateClient = (client: Clients) => {
     this.setState({
       editClients: client,
     });
     console.log(this.state.editClients);
   };
+
+    openModal = () =>{
+    this.setState({
+      updateModal: true,
+    })
+  }
+
+  closeModal = () =>{
+    this.setState({
+      updateModal: false,
+    })
+  }
 
   updateOn = () => {
     this.setState({
@@ -102,6 +115,11 @@ class ClientIndex extends React.Component<ClientIndexProps, any> {
         />
         <Container>
           <Row>
+          <Col md="3">
+              <CreateOrder
+                token={this.props.token}
+              />
+            </Col>
             <Col md="3">
               <CreateClient
                 token={this.props.token}
@@ -117,6 +135,7 @@ class ClientIndex extends React.Component<ClientIndexProps, any> {
                 updateOn={this.updateOn}
                 createOrder={this.props.createOrder}
                 setCreateOrder={this.props.setCreateOrder}
+                openModal={this.openModal}
               />
             </Col>
             {this.state.updateActive ? (
@@ -125,6 +144,7 @@ class ClientIndex extends React.Component<ClientIndexProps, any> {
                 updateOff={this.updateOff}
                 token={this.props.token}
                 fetch={this.fetchClients}
+                
               />
             ) : (
               <></>
