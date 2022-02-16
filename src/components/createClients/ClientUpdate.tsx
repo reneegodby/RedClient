@@ -13,16 +13,24 @@ import {
   Button,
 } from "reactstrap";
 
-type Props = {
+type ClientProps = {
   editClients: Clients;
   token: string;
   fetch: () => void;
   updateOff: () => void;
-  
 };
 
-class ClientUpdate extends React.Component<Props, any> {
-  constructor(props: Props) {
+type ClientState = {
+  editFirstName: string;
+  editLastName: string;
+  editPhoneNumber: string;
+  editAddress: string;
+  editNotes: string;
+  _isMounted: boolean;
+};
+
+class ClientUpdate extends React.Component<ClientProps, ClientState> {
+  constructor(props: ClientProps) {
     super(props);
     this.state = {
       editFirstName: "",
@@ -30,6 +38,7 @@ class ClientUpdate extends React.Component<Props, any> {
       editPhoneNumber: "",
       editAddress: "",
       editNotes: "",
+      _isMounted: false,
     };
   }
 
@@ -61,14 +70,19 @@ class ClientUpdate extends React.Component<Props, any> {
         "Content-Type": "application/json",
         Authorization: `${this.props.token}`,
       }),
-    }).then((res) => {
-      this.props.fetch();
-      this.props.updateOff();
-    });
+    })
+      .then((res) => {
+        this.props.fetch();
+        this.props.updateOff();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
+
   close = () => {
-    // this.props.modalOff();
-}
+    this.props.updateOff();
+  };
 
   render() {
     return (
@@ -90,9 +104,7 @@ class ClientUpdate extends React.Component<Props, any> {
                 onChange={(e) =>
                   this.setState({ editFirstName: e.target.value })
                 }
-              >
-                {" "}
-              </Input>
+              ></Input>
             </FormGroup>
             <FormGroup>
               <Label htmlFor="lastName">Last Name: </Label>
@@ -102,9 +114,7 @@ class ClientUpdate extends React.Component<Props, any> {
                 onChange={(e) =>
                   this.setState({ editLastName: e.target.value })
                 }
-              >
-                {" "}
-              </Input>
+              ></Input>
             </FormGroup>
             <FormGroup>
               <Label htmlFor="phoneNumber">Phone Number: </Label>
@@ -114,9 +124,7 @@ class ClientUpdate extends React.Component<Props, any> {
                 onChange={(e) =>
                   this.setState({ editPhoneNumber: e.target.value })
                 }
-              >
-                {" "}
-              </Input>
+              ></Input>
             </FormGroup>
             <FormGroup>
               <Label htmlFor="address">Address: </Label>
@@ -124,9 +132,7 @@ class ClientUpdate extends React.Component<Props, any> {
                 name="address"
                 value={this.state.editAddress}
                 onChange={(e) => this.setState({ editAddress: e.target.value })}
-              >
-                {" "}
-              </Input>
+              ></Input>
             </FormGroup>
             <FormGroup>
               <Label htmlFor="notes">Notes: </Label>
@@ -134,13 +140,13 @@ class ClientUpdate extends React.Component<Props, any> {
                 name="notes"
                 value={this.state.editNotes}
                 onChange={(e) => this.setState({ editNotes: e.target.value })}
-              >
-                {" "}
-              </Input>
+              ></Input>
             </FormGroup>
             <Button type="submit">Save</Button>
           </Form>
-          <Button onClick={this.close}>close</Button>
+          <Button type="reset" onClick={this.close}>
+            Close
+          </Button>
         </ModalBody>
       </Modal>
     );

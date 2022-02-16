@@ -41,7 +41,7 @@ class OrderIndex extends React.Component<Props, any> {
       method: "GET",
       headers: new Headers({
         "Content-Type": "application/json",
-        Authorization: `${this.props.token}`,
+        Authorization: `${localStorage.getItem('token')}`,
       }),
     })
       .then((res) => res.json())
@@ -49,11 +49,12 @@ class OrderIndex extends React.Component<Props, any> {
         this.setState({ orders: orderData });
         console.log(orderData);
       })
-      .catch((error) =>
+      .catch((error) =>{
         this.setState({
           error: true,
         })
-      );
+        console.log(error)
+      });
   };
 
   editUpdateOrder = (order: Orders) => {
@@ -101,11 +102,12 @@ class OrderIndex extends React.Component<Props, any> {
           <Row>
             <Col md="9">
               <OrderTable
-                orderArray={this.state.orders}
-                fetch={this.fetchOrders}
+                orders={this.state.orders}
+                fetchOrders={this.fetchOrders}
                 token={this.props.token}
                 editUpdateOrder={this.editUpdateOrder}
                 updateOn={this.updateOn}
+
               />
             </Col>
             {this.state.updateActive ? (

@@ -3,34 +3,42 @@ import React from "react";
 import { Button, Table, Row } from "reactstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Clients } from "./ClientIndex";
-import {Orders} from "../createOrders/OrderIndex";
-import {ClientIndexProps} from "../createClients/ClientIndex"
+import { Orders } from "../createOrders/OrderIndex";
+import { ClientIndexProps } from "../createClients/ClientIndex";
 import CreateOrder from "../createOrders/CreateOrder";
 import { Navigate } from "react-router-dom";
 
-type Props = {
+type ClientTableProps = {
   fetch: () => void;
   clientArray: object[];
   token: string;
   editUpdateClient: (client: Clients) => void;
   updateOn: () => void;
-  createOrder: ClientIndexProps['createOrder'];
-  setCreateOrder: ClientIndexProps['setCreateOrder'];
+  createOrder: ClientIndexProps["createOrder"];
+  setCreateOrder: ClientIndexProps["setCreateOrder"];
   openModal: () => void;
 };
 
-class ClientTable extends React.Component<Props, any> {
-  constructor(props: Props) {
+type ClientTableState = {
+  isSpecific: boolean;
+  searchArr: [];
+  value: [];
+  clientProps: {};
+  _isMounted: boolean;
+};
+
+class ClientTable extends React.Component<ClientTableProps, ClientTableState> {
+  constructor(props: ClientTableProps) {
     super(props);
     this.state = {
       isSpecific: false,
       searchArr: [],
       value: [],
       clientProps: this.props.clientArray,
+      _isMounted: false,
     };
   }
 
- 
   //Delete Client
   deleteClient = (client: Clients) => {
     console.log(client);
@@ -40,7 +48,11 @@ class ClientTable extends React.Component<Props, any> {
         "Content-Type": "application/json",
         Authorization: `${this.props.token}`,
       }),
-    }).then(() => this.props.fetch());
+    })
+      .then(() => this.props.fetch())
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   componentDidMount() {
@@ -80,35 +92,39 @@ class ClientTable extends React.Component<Props, any> {
               <td>{client.address}</td>
               <td>{client.notes}</td>
 
-              <Button
-                size="sm"
-                onClick={() => {
-                  this.props.editUpdateClient(client);
-                  this.props.updateOn();
-                }}
-              >
-                Update
-              </Button>
-
-              <Button
-                size="sm"
-                onClick={() => {
-                  this.deleteClient(client);
-                }}
-              >
-                Delete{" "}
-              </Button>
-              <Button
-                size="sm"
-                onClick={() => {
-                  this.props.setCreateOrder(client.id);
-                  this.props.openModal();
-                  
-                  console.log(client.id);
-                }}
-              >
-                Create Order
-              </Button>
+              <span>
+                <Button
+                  size="sm"
+                  onClick={() => {
+                    this.props.editUpdateClient(client);
+                    this.props.updateOn();
+                  }}
+                >
+                  Update
+                </Button>
+              </span>
+              <span>
+                <Button
+                  size="sm"
+                  onClick={() => {
+                    this.deleteClient(client);
+                  }}
+                >
+                  Delete{" "}
+                </Button>
+              </span>
+              <span>
+                <Button
+                  size="sm"
+                  onClick={() => {
+                    this.props.editUpdateClient(client);
+                    this.props.openModal();
+                    console.log(client.id);
+                  }}
+                >
+                  Create Order
+                </Button>
+              </span>
             </tr>
           </tbody>
         </Table>
@@ -122,8 +138,6 @@ class ClientTable extends React.Component<Props, any> {
     return (
       <div>
         <Row>{this.clientMapper()}</Row>
-        {/* <Navigate to='[route endpoint]' replace={true} /> */}
-        {/* <a href="http://locahost:3000"></a> */}
       </div>
     );
   }

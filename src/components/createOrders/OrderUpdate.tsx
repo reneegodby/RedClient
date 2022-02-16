@@ -13,15 +13,25 @@ import {
   Button,
 } from "reactstrap";
 
-type Props = {
+type OrderProps = {
   editOrders: Orders;
   token: string;
   fetch: () => void;
   updateOff: () => void;
 };
 
-class OrderUpdate extends React.Component<Props, any> {
-  constructor(props: Props) {
+type OrderState = {
+  editTypeOfOrder: string;
+  editQuantity: string;
+  editDueDate: string;
+  editPrice: string;
+  editNotes: string;
+  editImage: string;
+  _isMounted: boolean;
+};
+
+class OrderUpdate extends React.Component<OrderProps, OrderState> {
+  constructor(props: OrderProps) {
     super(props);
     this.state = {
       editTypeOfOrder: "",
@@ -30,20 +40,21 @@ class OrderUpdate extends React.Component<Props, any> {
       editPrice: "",
       editNotes: "",
       editImage: "",
+      _isMounted: false,
     };
   }
 
   componentDidMount() {
     this.setState({
-     _isMounted: true,
-   });
- }
+      _isMounted: true,
+    });
+  }
 
- componentWillUnmount() {
-   this.setState({
-     _isMounted: false,
-   });
- } 
+  componentWillUnmount() {
+    this.setState({
+      _isMounted: false,
+    });
+  }
 
   updateOrder = () => {
     fetch(`${APIURL}/orders/update/${this.props.editOrders}`, {
@@ -62,11 +73,16 @@ class OrderUpdate extends React.Component<Props, any> {
         "Content-Type": "application/json",
         Authorization: `${this.props.token}`,
       }),
-    }).then((res) => {
-      this.props.fetch();
-      this.props.updateOff();
-    });
+    })
+      .then((res) => {
+        this.props.fetch();
+        this.props.updateOff();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
+
   render() {
     return (
       <Modal isOpen={true}>
@@ -87,9 +103,7 @@ class OrderUpdate extends React.Component<Props, any> {
                 onChange={(e) =>
                   this.setState({ editTypeOfOrder: e.target.value })
                 }
-              >
-                {" "}
-              </Input>
+              ></Input>
             </FormGroup>
             <FormGroup>
               <Label htmlFor="quantity">Quantity: </Label>
@@ -99,9 +113,7 @@ class OrderUpdate extends React.Component<Props, any> {
                 onChange={(e) =>
                   this.setState({ editQuantity: e.target.value })
                 }
-              >
-                {" "}
-              </Input>
+              ></Input>
             </FormGroup>
             <FormGroup>
               <Label htmlFor="dueDate">Due Date: </Label>
@@ -109,9 +121,7 @@ class OrderUpdate extends React.Component<Props, any> {
                 name="dueDate"
                 value={this.state.editDueDate}
                 onChange={(e) => this.setState({ editDueDate: e.target.value })}
-              >
-                {" "}
-              </Input>
+              ></Input>
             </FormGroup>
             <FormGroup>
               <Label htmlFor="price">Price: </Label>
@@ -119,9 +129,7 @@ class OrderUpdate extends React.Component<Props, any> {
                 name="price"
                 value={this.state.editPrice}
                 onChange={(e) => this.setState({ editPrice: e.target.value })}
-              >
-                {" "}
-              </Input>
+              ></Input>
             </FormGroup>
             <FormGroup>
               <Label htmlFor="notes">Notes: </Label>
@@ -129,9 +137,7 @@ class OrderUpdate extends React.Component<Props, any> {
                 name="notes"
                 value={this.state.editNotes}
                 onChange={(e) => this.setState({ editNotes: e.target.value })}
-              >
-                {" "}
-              </Input>
+              ></Input>
             </FormGroup>
             <FormGroup>
               <Label htmlFor="image">Image: </Label>
@@ -139,9 +145,7 @@ class OrderUpdate extends React.Component<Props, any> {
                 name="image"
                 value={this.state.editImage}
                 onChange={(e) => this.setState({ editImage: e.target.value })}
-              >
-                {" "}
-              </Input>
+              ></Input>
             </FormGroup>
             <Button type="submit">Save</Button>
           </Form>

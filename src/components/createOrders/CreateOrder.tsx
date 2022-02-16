@@ -11,10 +11,15 @@ import {
   Button,
 } from "reactstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { Clients } from "../createClients/ClientIndex";
 import { Navigate } from "react-router-dom";
 
 type Props = {
   token: string;
+  editClients: Clients;
+  closeModal: () => void;
+  openModal: () => void;
+  updateModal: boolean;
 };
 
 export interface CreateOrdersState {
@@ -37,31 +42,24 @@ class CreateOrder extends React.Component<Props, any> {
       price: "",
       notes: "",
       image: "",
-      // createOrder: "",
-      // setCreateOrder: (createOrder: string),
+      orderPg: false,
+     
     };
     console.log(this.props.token);
   }
 
-  //newOrder is changing the state of orderPg
+    //newOrder is changing the state of orderPg
   newOrder = () => {
     this.setState({
       orderPg: !this.state.orderPg,
     });
   }; //when true: it will navigate to order pg
 
-  handleSubmit = () => {
-    console.log(
-      this.state.typeOfOrder,
-      this.state.quantity,
-      this.state.dueDate,
-      this.state.price,
-      this.state.notes,
-      this.state.image
-    );
-
-    fetch(`${APIURL}/orders/order`, {
-      method: "POST",
+    
+  createOrder = () => {     
+      
+      fetch(`${APIURL}/orders/order/${this.props.editClients.id}`, {
+        method: "POST",
       body: JSON.stringify({
         orders: {
           typeOfOrder: this.state.typeOfOrder,
@@ -71,30 +69,39 @@ class CreateOrder extends React.Component<Props, any> {
           notes: this.state.notes,
           image: this.state.image,
         },
-      }),
 
+      }),
+      
       headers: new Headers({
         "Content-Type": "application/json",
         Authorization: `${this.props.token}`,
       }),
     })
-      .then((res) => {
-        res.json();
-        console.log(res);
-      })
-      .then((orderData) => {
-        console.log(orderData);
-        this.setState({
-          typeOfOrder: "",
-          quantity: "",
-          dueDate: "",
-          price: "",
-          notes: "",
-          image: "",
-        });
-        this.newOrder(); //will create new order
+    .then((res) => {
+      res.json();
+      console.log(res);
+    })
+    .then((orderData) => {
+      console.log(orderData);
+      this.setState({
+        typeOfOrder: "",
+        quantity: "",
+        dueDate: "",
+        price: "",
+        notes: "",
+        image: "",
       });
+      this.props.closeModal();
+      
+      this.newOrder(); //sets state to navigate to orders
+    }).catch(err => {
+      console.log(err)
+    })
   };
+  
+  close = () => {
+    this.props.closeModal();
+  }
 
   componentDidMount() {
     this.setState({
@@ -110,14 +117,14 @@ class CreateOrder extends React.Component<Props, any> {
 
   render() {
     return (
-      <Modal isOpen={true}>
+      <Modal isOpen={this.props.updateModal}>
         <ModalHeader>Create Order</ModalHeader>
         <ModalBody>
           <Form
             inline
             onSubmit={(e) => {
               e.preventDefault();
-              // this.createOrder();
+              this.createOrder();
             }}
           >
             <FormGroup>
@@ -129,6 +136,7 @@ class CreateOrder extends React.Component<Props, any> {
               >
                 {" "}
               </Input>
+              
             </FormGroup>
             <FormGroup>
               <Label htmlFor="quantity">Quantity: </Label>
@@ -182,6 +190,7 @@ class CreateOrder extends React.Component<Props, any> {
             </FormGroup>
             <Button type="submit">Save</Button>
           </Form>
+          <Button type="reset" onClick={this.close}>Close</Button>
         </ModalBody>
         {this.state.orderPg && <Navigate to="/orders" replace={true} />}
         {/* Navigate to order pg if order created successfully */}

@@ -4,48 +4,69 @@ import { Button, Table, Row } from "reactstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Orders } from "./OrderIndex";
 
-type Props = {
-  fetch: () => void;
-  orderArray: object[];
+type OrderTableProps = {
+  fetchOrders: () => void;
+  orders: object[];
   token: string;
   editUpdateOrder: (order: Orders) => void;
   updateOn: () => void;
 };
 
-class OrderTable extends React.Component<Props, any> {
-  constructor(props: Props) {
+type OrderTableState = {
+  isSpecific: boolean;
+  searchArr: [];
+  value: [];
+  orderProps: {};
+  _isMounted: boolean;
+};
+
+class OrderTable extends React.Component<OrderTableProps, OrderTableState> {
+  constructor(props: OrderTableProps) {
     super(props);
     this.state = {
       isSpecific: false,
       searchArr: [],
       value: [],
-      orderProps: this.props.orderArray,
+      orderProps: this.props.orders,
+      _isMounted: false,
     };
   }
 
   //Delete Order
   deleteOrder = (order: Orders) => {
     console.log(order);
-    // fetch(`http://localhost:5001/orders/delete/${order}`, {
+
     fetch(`${APIURL}/orders/delete/${order}`, {
-      /*Heroku */ method: "DELETE",
+      method: "DELETE",
       headers: new Headers({
         "Content-Type": "application/json",
         Authorization: `${this.props.token}`,
       }),
-    }).then(() => this.props.fetch());
+    })
+      .then(() => this.props.fetchOrders())
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   componentDidMount() {
-    this.props.fetch();
+    this.props.fetchOrders();
+    this.setState({
+      _isMounted: true,
+    });
+  }
+
+  componentWillUnmount() {
+    this.setState({
+      _isMounted: false,
+    });
   }
 
   orderMapper = () => {
     console.log("orderMapper");
-    console.log(this.props.orderArray);
+    console.log(this.props.orders);
 
-    return this.props.orderArray.map((order: any, index: number) => {
-      index += 1;
+    return this.props.orders?.map((order: any, index: number) => {
       return (
         <Table bordered responsive striped>
           <thead>
@@ -66,35 +87,33 @@ class OrderTable extends React.Component<Props, any> {
               <td>
                 {order.client.firstName} {order.client.lastName}
               </td>
-
               <td>{order.typeOfOrder}</td>
               <td>{order.quantity}</td>
               <td>{order.dueDate}</td>
               <td>{order.price}</td>
               <td>{order.notes}</td>
               <td>{order.image}</td>
-
-              <Button
-                size="sm"
-                onClick={() => {
-                  this.props.editUpdateOrder(order);
-                  this.props.updateOn();
-                }}
-              >
-                Update
-              </Button>
-
-              <Button
-                size="sm"
-                onClick={() => {
-                  this.deleteOrder(order);
-                }}
-              >
-                Delete{" "}
-              </Button>
-
-              
-              
+              <span>
+                <Button
+                  size="sm"
+                  onClick={() => {
+                    this.props.editUpdateOrder(order);
+                    this.props.updateOn();
+                  }}
+                >
+                  Update
+                </Button>
+              </span>
+              <span>
+                <Button
+                  size="sm"
+                  onClick={() => {
+                    this.deleteOrder(order);
+                  }}
+                >
+                  Delete{" "}
+                </Button>
+              </span>
             </tr>
           </tbody>
         </Table>

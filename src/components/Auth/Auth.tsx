@@ -5,7 +5,8 @@ import Login from "./Login";
 import { Container, Row, Col } from "reactstrap";
 
 type Props = {
-  updateToken: any;
+  updateToken: (newToken: string) => void;
+  sessionToken: string;
 };
 
 type State = {
@@ -40,7 +41,7 @@ class Auth extends React.Component<Props, State> {
             <Signup update={this.props.updateToken} />
           </Col>
           <Col md="6">
-            <Login update={this.props.updateToken} />
+            <Login update={this.props.updateToken} sessionToken={this.props.sessionToken} />
           </Col>
         </Row>
       </Container>

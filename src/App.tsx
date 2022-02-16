@@ -4,7 +4,7 @@ import "./App.css";
 import Auth from "./components/Auth/Auth";
 import ClientIndex from "./components/createClients/ClientIndex";
 import OrderIndex from "./components/createOrders/OrderIndex";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import { Orders } from "./components/createOrders/OrderIndex";
 import CreateOrder from "./components/createOrders/CreateOrder";
 
@@ -15,10 +15,10 @@ export interface AppProps {
 
 const App: React.FunctionComponent = () => {
   const [sessionToken, setSessionToken] = useState<string>("");
-
   const [createOrder, setCreateOrder] = useState<string>("");
   const [clientId, setClientId] = useState<string>("");
-
+  const navigate = useNavigate();
+  
   useEffect(() => {
     if (localStorage.getItem("token")) {
       setSessionToken(localStorage.getItem("token") || "");
@@ -35,12 +35,18 @@ const App: React.FunctionComponent = () => {
     console.log("clearToken");
     localStorage.clear();
     setSessionToken("");
+    navigate("/");
   };
 
   return (
-    <BrowserRouter>
+    
       <Routes>
-        <Route path="/" element={<Auth updateToken={updateToken} />} />
+        <Route
+          path="/"
+          element={
+            <Auth updateToken={updateToken} sessionToken={sessionToken} />
+          }
+        />
         <Route
           path="/clients"
           element={
@@ -66,7 +72,7 @@ const App: React.FunctionComponent = () => {
           }
         />
       </Routes>
-    </BrowserRouter>
+   
   );
 };
 

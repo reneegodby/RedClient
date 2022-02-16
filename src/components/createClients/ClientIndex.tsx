@@ -8,6 +8,7 @@ import { Container, Row, Col } from "reactstrap";
 import CreateOrder from "../createOrders/CreateOrder";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { AppProps } from "../../../src/App";
+import { Orders } from "../createOrders/OrderIndex";
 export interface ClientIndexProps {
   token: string;
   clickLogout: () => void;
@@ -34,6 +35,7 @@ class ClientIndex extends React.Component<ClientIndexProps, any> {
       error: false,
       updateActive: false,
       editClients: {},
+      updateModal: false
     };
   }
 
@@ -45,7 +47,7 @@ class ClientIndex extends React.Component<ClientIndexProps, any> {
       method: "GET",
       headers: new Headers({
         "Content-Type": "application/json",
-        Authorization: `${this.props.token}`,
+        Authorization: `${localStorage.getItem('token')}`,
       }),
     })
       .then((res) => res.json())
@@ -60,7 +62,13 @@ class ClientIndex extends React.Component<ClientIndexProps, any> {
       );
   };
 
-  
+  createNewOrder = (order: Orders) => {
+    this.setState({
+      newOrder: order,
+    });
+    console.log(this.state.newOrder);
+  };
+
   editUpdateClient = (client: Clients) => {
     this.setState({
       editClients: client,
@@ -68,17 +76,17 @@ class ClientIndex extends React.Component<ClientIndexProps, any> {
     console.log(this.state.editClients);
   };
 
-    openModal = () =>{
+  openModal = () => {
     this.setState({
       updateModal: true,
-    })
-  }
+    });
+  };
 
-  closeModal = () =>{
+  closeModal = () => {
     this.setState({
       updateModal: false,
-    })
-  }
+    });
+  };
 
   updateOn = () => {
     this.setState({
@@ -97,6 +105,7 @@ class ClientIndex extends React.Component<ClientIndexProps, any> {
     this.setState({
       _isMounted: true,
     });
+    console.log(this.props.token);
   }
 
   componentWillUnmount() {
@@ -115,9 +124,13 @@ class ClientIndex extends React.Component<ClientIndexProps, any> {
         />
         <Container>
           <Row>
-          <Col md="3">
+            <Col md="3">
               <CreateOrder
                 token={this.props.token}
+                editClients={this.state.editClients}
+                closeModal={this.closeModal}
+                openModal={this.openModal}
+                updateModal={this.state.updateModal}
               />
             </Col>
             <Col md="3">
@@ -144,7 +157,6 @@ class ClientIndex extends React.Component<ClientIndexProps, any> {
                 updateOff={this.updateOff}
                 token={this.props.token}
                 fetch={this.fetchClients}
-                
               />
             ) : (
               <></>

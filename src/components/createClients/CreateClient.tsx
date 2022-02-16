@@ -69,7 +69,9 @@ class CreateClient extends React.Component<Props, any> {
           notes: "",
         });
         this.props.fetch();
-      });
+      }).catch(err => {
+        console.log(err)
+      })
   };
 
   componentDidMount() {

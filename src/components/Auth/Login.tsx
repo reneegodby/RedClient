@@ -13,6 +13,7 @@ import { Navigate } from "react-router-dom";
 
 type Props = {
   update: any;
+  sessionToken: string;
 };
 class Login extends React.Component<Props, any> {
   constructor(props: Props) {
@@ -24,7 +25,7 @@ class Login extends React.Component<Props, any> {
       message: "",
       responseCode: 0,
       _isMounted: false,
-      sessionToken: "",
+      
     };
   }
   componentDidMount = () => {
@@ -117,9 +118,9 @@ class Login extends React.Component<Props, any> {
           </FormGroup>
           <Button type="submit">Login</Button>
         </Form>
-        {this.state.responseCode === 200 && (
-          <Navigate to="/clients" replace={true} />
-        )}
+        {this.state.responseCode === 200 && this.props.sessionToken.length > 0 ? 
+          <Navigate to="/clients" replace={true} /> : 
+          <></>  }
       </div>
     );
   }
