@@ -48,11 +48,11 @@ class ClientUpdate extends React.Component<ClientProps, ClientState> {
     });
   }
 
-  componentWillUnmount() {
-    this.setState({
-      _isMounted: false,
-    });
-  }
+  // componentWillUnmount() {
+  //   this.setState({
+  //     _isMounted: false,
+  //   });
+  // }
 
   updateClient = () => {
     fetch(`${APIURL}/clients/update/${this.props.editClients.id}`, {

@@ -27,6 +27,14 @@ export interface Clients {
   notes: string;
 }
 
+export interface ClientIndexState {
+  clients: [];
+  error: boolean;
+  updateActive: boolean;
+  editClients: {};
+  updateModal: boolean;
+}
+
 class ClientIndex extends React.Component<ClientIndexProps, any> {
   constructor(props: ClientIndexProps) {
     super(props);
@@ -35,7 +43,7 @@ class ClientIndex extends React.Component<ClientIndexProps, any> {
       error: false,
       updateActive: false,
       editClients: {},
-      updateModal: false
+      updateModal: false,
     };
   }
 
@@ -47,7 +55,7 @@ class ClientIndex extends React.Component<ClientIndexProps, any> {
       method: "GET",
       headers: new Headers({
         "Content-Type": "application/json",
-        Authorization: `${localStorage.getItem('token')}`,
+        Authorization: `${localStorage.getItem("token")}`,
       }),
     })
       .then((res) => res.json())

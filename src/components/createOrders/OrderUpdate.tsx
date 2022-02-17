@@ -50,14 +50,14 @@ class OrderUpdate extends React.Component<OrderProps, OrderState> {
     });
   }
 
-  componentWillUnmount() {
-    this.setState({
-      _isMounted: false,
-    });
-  }
+  // componentWillUnmount() {
+  //   this.setState({
+  //     _isMounted: false,
+  //   });
+  // }
 
   updateOrder = () => {
-    fetch(`${APIURL}/orders/update/${this.props.editOrders}`, {
+    fetch(`${APIURL}/orders/update/${this.props.editOrders.orderId}`, {
       method: "PUT",
       body: JSON.stringify({
         orders: {

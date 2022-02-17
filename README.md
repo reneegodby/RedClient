@@ -22,9 +22,10 @@ Client:
 - [2/10/22]: added update and delete functions 
 - [2/10/22]: created all order components
 - [2/11/22]: displayed both client and order components
-- []: 
-- []: 
-- []: 
+- [2/12/22]: created modals & deployed to heroku
+- [2/13/22]: debugged 
+- [2/15/22]: fixed routes and buttons 
+
 - []:  
 
 

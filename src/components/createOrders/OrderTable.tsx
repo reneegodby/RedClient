@@ -36,7 +36,7 @@ class OrderTable extends React.Component<OrderTableProps, OrderTableState> {
   deleteOrder = (order: Orders) => {
     console.log(order);
 
-    fetch(`${APIURL}/orders/delete/${order}`, {
+    fetch(`${APIURL}/orders/delete/${order.orderId}`, {
       method: "DELETE",
       headers: new Headers({
         "Content-Type": "application/json",
@@ -56,11 +56,11 @@ class OrderTable extends React.Component<OrderTableProps, OrderTableState> {
     });
   }
 
-  componentWillUnmount() {
-    this.setState({
-      _isMounted: false,
-    });
-  }
+  // componentWillUnmount() {
+  //   this.setState({
+  //     _isMounted: false,
+  //   });
+  // }
 
   orderMapper = () => {
     console.log("orderMapper");
@@ -71,7 +71,7 @@ class OrderTable extends React.Component<OrderTableProps, OrderTableState> {
         <Table bordered responsive striped>
           <thead>
             <tr key={index}>
-              <th>Client ID</th>
+              {/* <th>Client ID</th> */}
               <th>Client Name</th>
               <th>Type of Order </th>
               <th>Quantity</th>
@@ -83,7 +83,7 @@ class OrderTable extends React.Component<OrderTableProps, OrderTableState> {
           </thead>
           <tbody>
             <tr>
-              <td>{index}</td>
+              {/* <td>{index}</td> */}
               <td>
                 {order.client.firstName} {order.client.lastName}
               </td>

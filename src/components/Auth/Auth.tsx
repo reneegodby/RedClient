@@ -41,7 +41,10 @@ class Auth extends React.Component<Props, State> {
             <Signup update={this.props.updateToken} />
           </Col>
           <Col md="6">
-            <Login update={this.props.updateToken} sessionToken={this.props.sessionToken} />
+            <Login
+              update={this.props.updateToken}
+              sessionToken={this.props.sessionToken}
+            />
           </Col>
         </Row>
       </Container>

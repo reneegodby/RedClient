@@ -1,5 +1,6 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { Link } from "react-router-dom";
 import {
   Navbar,
   NavbarBrand,
@@ -7,7 +8,6 @@ import {
   NavItem,
   Button,
   Collapse,
-  
 } from "reactstrap";
 
 interface Props {
@@ -15,10 +15,13 @@ interface Props {
   tokenUpdate: any;
 }
 
+// type SiteBarState {
+
+// }
+
 class SiteBar extends React.Component<Props, any> {
   constructor(props: Props) {
     super(props);
-
     this.state = {
       isOpen: false,
       hasError: false,
@@ -48,6 +51,12 @@ class SiteBar extends React.Component<Props, any> {
             <Nav className="ml-auto" navbar>
               <NavItem>
                 <Button onClick={() => this.props.clickLogout()}>Logout</Button>
+              </NavItem>
+              <NavItem>
+                <Button><Link to ='/clients'>Clients</Link></Button>
+              </NavItem>
+              <NavItem>
+                <Button><Link to ='/orders'>Orders</Link></Button>
               </NavItem>
             </Nav>
           </Collapse>

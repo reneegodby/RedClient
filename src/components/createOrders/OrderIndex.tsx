@@ -1,18 +1,15 @@
 import APIURL from "../../helpers/environment";
 import React from "react";
 import SiteBar from "../Auth/SiteBar";
-import CreateOrder from "./CreateOrder";
 import OrderTable from "./OrderTable";
 import OrderUpdate from "./OrderUpdate";
 import { Container, Row, Col } from "reactstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-
 interface Props {
   token: string;
   clickLogout: any;
   tokenUpdate: any;
 }
-
 export interface Orders {
   orderId: string;
   typeOfOrder: string;
@@ -41,7 +38,7 @@ class OrderIndex extends React.Component<Props, any> {
       method: "GET",
       headers: new Headers({
         "Content-Type": "application/json",
-        Authorization: `${localStorage.getItem('token')}`,
+        Authorization: `${localStorage.getItem("token")}`,
       }),
     })
       .then((res) => res.json())
@@ -49,11 +46,11 @@ class OrderIndex extends React.Component<Props, any> {
         this.setState({ orders: orderData });
         console.log(orderData);
       })
-      .catch((error) =>{
+      .catch((error) => {
         this.setState({
           error: true,
-        })
-        console.log(error)
+        });
+        console.log(error);
       });
   };
 
@@ -107,7 +104,6 @@ class OrderIndex extends React.Component<Props, any> {
                 token={this.props.token}
                 editUpdateOrder={this.editUpdateOrder}
                 updateOn={this.updateOn}
-
               />
             </Col>
             {this.state.updateActive ? (

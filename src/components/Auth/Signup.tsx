@@ -14,7 +14,7 @@ import {
 import { Navigate } from "react-router-dom";
 
 type Props = {
-  update: any;
+  update: (newToken: string) => void;
 };
 
 class Signup extends React.Component<Props, any> {
@@ -35,16 +35,16 @@ class Signup extends React.Component<Props, any> {
     });
   };
 
-  componentWillUnmount() {
-    this.setState({
-      _isMounted: false,
-    });
-  }
+  // componentDidUnmount() {
+  //   this.setState({
+  //     _isMounted: false,
+  //   });
+  // }
 
   handleSubmit = () => {
     let errorCode: number | string;
     console.log(this.state.email, this.state.password);
-    
+
     fetch(`${APIURL}/auth/signup`, {
       method: "POST",
       body: JSON.stringify({

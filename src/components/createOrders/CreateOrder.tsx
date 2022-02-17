@@ -43,23 +43,20 @@ class CreateOrder extends React.Component<Props, any> {
       notes: "",
       image: "",
       orderPg: false,
-     
     };
     console.log(this.props.token);
   }
 
-    //newOrder is changing the state of orderPg
+  //newOrder is changing the state of orderPg
   newOrder = () => {
     this.setState({
       orderPg: !this.state.orderPg,
     });
   }; //when true: it will navigate to order pg
 
-    
-  createOrder = () => {     
-      
-      fetch(`${APIURL}/orders/order/${this.props.editClients.id}`, {
-        method: "POST",
+  createOrder = () => {
+    fetch(`${APIURL}/orders/order/${this.props.editClients.id}`, {
+      method: "POST",
       body: JSON.stringify({
         orders: {
           typeOfOrder: this.state.typeOfOrder,
@@ -69,39 +66,39 @@ class CreateOrder extends React.Component<Props, any> {
           notes: this.state.notes,
           image: this.state.image,
         },
-
       }),
-      
+
       headers: new Headers({
         "Content-Type": "application/json",
         Authorization: `${this.props.token}`,
       }),
     })
-    .then((res) => {
-      res.json();
-      console.log(res);
-    })
-    .then((orderData) => {
-      console.log(orderData);
-      this.setState({
-        typeOfOrder: "",
-        quantity: "",
-        dueDate: "",
-        price: "",
-        notes: "",
-        image: "",
+      .then((res) => {
+        res.json();
+        console.log(res);
+      })
+      .then((orderData) => {
+        console.log(orderData);
+        this.setState({
+          typeOfOrder: "",
+          quantity: "",
+          dueDate: "",
+          price: "",
+          notes: "",
+          image: "",
+        });
+        this.props.closeModal();
+
+        this.newOrder(); //sets state to navigate to orders
+      })
+      .catch((err) => {
+        console.log(err);
       });
-      this.props.closeModal();
-      
-      this.newOrder(); //sets state to navigate to orders
-    }).catch(err => {
-      console.log(err)
-    })
   };
-  
+
   close = () => {
     this.props.closeModal();
-  }
+  };
 
   componentDidMount() {
     this.setState({
@@ -136,7 +133,6 @@ class CreateOrder extends React.Component<Props, any> {
               >
                 {" "}
               </Input>
-              
             </FormGroup>
             <FormGroup>
               <Label htmlFor="quantity">Quantity: </Label>
@@ -190,7 +186,9 @@ class CreateOrder extends React.Component<Props, any> {
             </FormGroup>
             <Button type="submit">Save</Button>
           </Form>
-          <Button type="reset" onClick={this.close}>Close</Button>
+          <Button type="reset" onClick={this.close}>
+            Close
+          </Button>
         </ModalBody>
         {this.state.orderPg && <Navigate to="/orders" replace={true} />}
         {/* Navigate to order pg if order created successfully */}

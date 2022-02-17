@@ -6,18 +6,18 @@ import "bootstrap/dist/css/bootstrap.min.css";
 type Props = {
   token: string;
   fetch: () => void;
-  // setClientId: (clientId: string) => void;
 };
 
 type State = {
-  firstName: string,
-  lastName: string,
-  phoneNumber: string,
-  address: string,
-  notes: string,
-}
+  firstName: string;
+  lastName: string;
+  phoneNumber: string;
+  address: string;
+  notes: string;
+  _isMounted: boolean;
+};
 
-class CreateClient extends React.Component<Props, any> {
+class CreateClient extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
@@ -26,6 +26,7 @@ class CreateClient extends React.Component<Props, any> {
       phoneNumber: "",
       address: "",
       notes: "",
+      _isMounted: false,
     };
     console.log(this.props.token);
   }
@@ -69,9 +70,10 @@ class CreateClient extends React.Component<Props, any> {
           notes: "",
         });
         this.props.fetch();
-      }).catch(err => {
-        console.log(err)
       })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   componentDidMount() {

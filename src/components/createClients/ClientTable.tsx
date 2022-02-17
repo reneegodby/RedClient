@@ -3,10 +3,7 @@ import React from "react";
 import { Button, Table, Row } from "reactstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Clients } from "./ClientIndex";
-import { Orders } from "../createOrders/OrderIndex";
 import { ClientIndexProps } from "../createClients/ClientIndex";
-import CreateOrder from "../createOrders/CreateOrder";
-import { Navigate } from "react-router-dom";
 
 type ClientTableProps = {
   fetch: () => void;

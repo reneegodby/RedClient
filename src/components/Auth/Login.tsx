@@ -12,7 +12,7 @@ import {
 import { Navigate } from "react-router-dom";
 
 type Props = {
-  update: any;
+  update: (newToken: string) => void;
   sessionToken: string;
 };
 class Login extends React.Component<Props, any> {
@@ -25,7 +25,6 @@ class Login extends React.Component<Props, any> {
       message: "",
       responseCode: 0,
       _isMounted: false,
-      
     };
   }
   componentDidMount = () => {
@@ -34,17 +33,17 @@ class Login extends React.Component<Props, any> {
     });
   };
 
-  componentWillUnmount() {
-    this.setState({
-      _isMounted: false,
-    });
-  }
+  // componentDidUnmount() {
+  //   this.setState({
+  //     _isMounted: false,
+  //   });
+  // }
 
   handleSubmit = () => {
     let errorCode: number | string;
-    console.log("login handle");
+    // console.log("login handle");
     console.log(this.state.email, this.state.password);
-    
+
     fetch(`${APIURL}/auth/login`, {
       method: "POST",
       body: JSON.stringify({
@@ -118,9 +117,12 @@ class Login extends React.Component<Props, any> {
           </FormGroup>
           <Button type="submit">Login</Button>
         </Form>
-        {this.state.responseCode === 200 && this.props.sessionToken.length > 0 ? 
-          <Navigate to="/clients" replace={true} /> : 
-          <></>  }
+        {this.state.responseCode === 200 &&
+        this.props.sessionToken.length > 0 ? (
+          <Navigate to="/clients" replace={true} />
+        ) : (
+          <></>
+        )}
       </div>
     );
   }
