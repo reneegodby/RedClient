@@ -84,7 +84,7 @@ class Login extends React.Component<Props, any> {
     console.log("login render");
     return (
       <div>
-        <h3>Login</h3>
+        <h3 className="title">Login</h3>
         <Form
           inline
           onSubmit={(e) => {
@@ -92,30 +92,31 @@ class Login extends React.Component<Props, any> {
             this.handleSubmit();
           }}
         >
-          <FormGroup floating>
-            <Input
+          <FormGroup>
+            <Input 
+            bsSize="sm"
+            className="mb-3"
               type="email"
               placeholder="Email"
               onChange={(e) => this.setState({ email: e.target.value })}
               value={this.state.email}
-              name="email"
-            />
-            <Label for="exampleEmail">Email</Label>
+               />
           </FormGroup>
-          <FormGroup floating>
+          <FormGroup>
             <Input
+            bsSize="sm"
+            className="mb-3"
               type="password"
               placeholder="Password"
               onChange={(e) => this.setState({ password: e.target.value })}
               value={this.state.password}
               name="password"
             />
-            <Label for="examplePassword">Password</Label>
             <FormFeedback>
               {this.state.message !== "" ? <p>{this.state.message}</p> : ""}
             </FormFeedback>
           </FormGroup>
-          <Button type="submit">Login</Button>
+          <Button className="mainBtns" type="submit">Login</Button>
         </Form>
         {this.state.responseCode === 200 &&
         this.props.sessionToken.length > 0 ? (

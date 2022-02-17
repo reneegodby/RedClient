@@ -35,12 +35,6 @@ class Signup extends React.Component<Props, any> {
     });
   };
 
-  // componentDidUnmount() {
-  //   this.setState({
-  //     _isMounted: false,
-  //   });
-  // }
-
   handleSubmit = () => {
     let errorCode: number | string;
     console.log(this.state.email, this.state.password);
@@ -93,7 +87,7 @@ class Signup extends React.Component<Props, any> {
   render() {
     return (
       <div>
-        <h3>Signup</h3>
+        <h3 className="title">New Account</h3>
         <Form
           inline
           onSubmit={(e) => {
@@ -101,42 +95,47 @@ class Signup extends React.Component<Props, any> {
             this.handleSubmit();
           }}
         >
-          <FormGroup floating>
+          <FormGroup>
             <Input
+            bsSize="sm"
+            className="mb-3"
               type="email"
               placeholder="Email"
               onChange={(e) => this.setState({ email: e.target.value })}
               value={this.state.email}
-              name="email"
             />
-            <Label for="exampleEmail">Email</Label>
-          </FormGroup>{" "}
-          <FormGroup floating>
+          </FormGroup>
+          <FormGroup>
             <Input
+            bsSize="sm"
+            className="mb-3"
               type="password"
               placeholder="Password"
               onChange={(e) => this.setState({ password: e.target.value })}
               value={this.state.password}
               name="password"
             />
-            <Label for="examplePassword">Password</Label>
-          </FormGroup>{" "}
-          <FormGroup floating>
+          </FormGroup>
+          <FormGroup>
             <FormText>
-              <List className="password-list">
+              <Button
+                className="mainBtns"
+                type="submit"
+                disabled={!this.validPassword()}
+              >
+                Sign Up
+              </Button>
+              <List type="unstyled" className="passwordReq">
                 <li>Password Requirements:</li>
                 <li>At least 8 characters</li>
                 <li>A mixture of both uppercase and lowercase letters.</li>
                 <li>A mixture of letters and numbers.</li>
               </List>
-            </FormText>{" "}
+            </FormText>
             <FormFeedback>
               {this.state.message !== "" ? <p>{this.state.message}</p> : ""}
             </FormFeedback>
-          </FormGroup>{" "}
-          <Button type="submit" disabled={!this.validPassword()}>
-            Sign Up
-          </Button>{" "}
+          </FormGroup>
           <FormFeedback>
             {this.state.message !== "" ? (
               <p className="message">{this.state.message}</p>

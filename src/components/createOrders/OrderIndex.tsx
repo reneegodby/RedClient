@@ -90,13 +90,14 @@ class OrderIndex extends React.Component<Props, any> {
     console.log("OrderIndex render");
     console.log(this.state);
     return (
-      <div>
+      <div className="backgroundOrders">
         <SiteBar
           clickLogout={this.props.clickLogout}
           tokenUpdate={this.props.tokenUpdate}
         />
+          <h3 className="title">My Orders</h3>
         <Container>
-          <Row>
+          <Row className="orderTable">
             <Col md="9">
               <OrderTable
                 orders={this.state.orders}

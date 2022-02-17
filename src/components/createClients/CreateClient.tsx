@@ -91,7 +91,7 @@ class CreateClient extends React.Component<Props, State> {
   render() {
     return (
       <div>
-        <h2>Client Information</h2>
+        <h2 className="title">Create New Client</h2>
         <Form
           inline
           onSubmit={(e) => {

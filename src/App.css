@@ -2,25 +2,103 @@
   text-align: center;
 }
 
-
-.password-list{
-  list-style: none;
+/* Navbar */
+.navbarButton {
+  margin-right: 10px;
 }
 
-
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* Sign up Box */
+.auth-container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.mainRow {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
 }
 
+.logo {
+  display: flex;
+  justify-content: center;
+  /* width: 50vw; */
+  height: 20vw;
+}
+
+/* Main pg background */
+.background {
+  background-image: url(/src/assets/AdobeStock_216767241.jpeg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+  min-width: 100%;
+}
+
+.backgroundClients{
+  background-image: url(/src/assets/AdobeStock_255195597_Preview.jpeg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+  min-width: 100%;
+}
+
+.backgroundOrders{
+  background-image: url(/src/assets/AdobeStock_222036336_Preview.jpeg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+  min-width: 100%;
+}
+
+/* SignUp box title */
+.title {
+  margin-top: 0;
+  margin-bottom: 4vh;
+  color: rgb(207,20,115);
+  font-family: 'Berkshire Swash', cursive;
+  font-weight: bold;
+  text-align: center;
+  font-size: 2vw;
+}
+
+.mainBtns {
+  display: flex;
+  justify-content: center;
+  align-items: center ;
+  background-color: rgb(207,20,115)!important;
+  /* margin-top: 2vh; */
+}
+
+.welcomeBox {
+ margin-top: 50px;
+ text-align: center;
+ font-family: 'Berkshire Swash', cursive;
+  border-radius: 20px;
+ padding: 1vw;
+ width: 100%;
+ /* border: white dotted 8px; */
+ /* color: rgb(207,20,115); */
+ font-size: 4vw;
+  
+}
+
+.welcomeP{
+  font-size: 3vw;
+}
+
+.passwordReq{
+  /* color: black; */
+  font-weight: bold;
+}
+
+.mb-3{
+  border-radius: 10px!important;
+}
+
+.orderTable{
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  
+}

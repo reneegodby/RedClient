@@ -68,11 +68,11 @@ class OrderTable extends React.Component<OrderTableProps, OrderTableState> {
 
     return this.props.orders?.map((order: any, index: number) => {
       return (
-        <Table bordered responsive striped>
+        <Table bordered responsive striped >
           <thead>
             <tr key={index}>
               {/* <th>Client ID</th> */}
-              <th>Client Name</th>
+              <th scope="row">Client Name</th>
               <th>Type of Order </th>
               <th>Quantity</th>
               <th>Due Date</th>

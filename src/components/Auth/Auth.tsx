@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Signup from "./Signup";
 import Login from "./Login";
 import { Container, Row, Col } from "reactstrap";
+import Logo from "../../assets/Brieandlily_tealcircle (1).png";
 
 type Props = {
   updateToken: (newToken: string) => void;
@@ -35,19 +36,34 @@ class Auth extends React.Component<Props, State> {
       return <h1>Error</h1>;
     }
     return (
-      <Container>
-        <Row>
-          <Col md="6">
-            <Signup update={this.props.updateToken} />
-          </Col>
-          <Col md="6">
-            <Login
-              update={this.props.updateToken}
-              sessionToken={this.props.sessionToken}
-            />
-          </Col>
-        </Row>
-      </Container>
+      <div className="background">
+        <Container className="auth-container">
+          <div className="mainRow">
+            <Row>
+              <Col>
+                <Signup update={this.props.updateToken} />
+              </Col>
+              <Col className="logo">
+                {" "}
+                <img src={Logo} alt="logo" />
+              </Col>
+              <Col>
+                <Login
+                  update={this.props.updateToken}
+                  sessionToken={this.props.sessionToken}
+                />
+              </Col>
+            </Row>
+          </div>
+        </Container>
+
+        <Container className="auth-container">
+          <div className="welcomeBox">
+          {/* <p> Welcome to B&L Sweet Treats</p>
+          <p className="welcomeP">A handy order tracker for home business bakers</p> */}
+          </div>
+        </Container>
+      </div>
     );
   }
 }

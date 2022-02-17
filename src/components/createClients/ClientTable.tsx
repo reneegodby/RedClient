@@ -134,6 +134,7 @@ class ClientTable extends React.Component<ClientTableProps, ClientTableState> {
     console.log(this.state.clientProps);
     return (
       <div>
+        <h3 className="title">My Clients</h3>
         <Row>{this.clientMapper()}</Row>
       </div>
     );

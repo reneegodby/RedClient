@@ -125,51 +125,53 @@ class ClientIndex extends React.Component<ClientIndexProps, any> {
     console.log("ClientIndex render");
     console.log(this.state);
     return (
-      <div>
+      <div className="backgroundClients">
         <SiteBar
           clickLogout={this.props.clickLogout}
           tokenUpdate={this.props.tokenUpdate}
         />
+        <Col md="3">
+          <CreateOrder
+            token={this.props.token}
+            editClients={this.state.editClients}
+            closeModal={this.closeModal}
+            openModal={this.openModal}
+            updateModal={this.state.updateModal}
+          />
+        </Col>
         <Container>
-          <Row>
-            <Col md="3">
-              <CreateOrder
-                token={this.props.token}
-                editClients={this.state.editClients}
-                closeModal={this.closeModal}
-                openModal={this.openModal}
-                updateModal={this.state.updateModal}
-              />
-            </Col>
-            <Col md="3">
-              <CreateClient
-                token={this.props.token}
-                fetch={this.fetchClients}
-              />
-            </Col>
-            <Col md="9">
-              <ClientTable
-                clientArray={this.state.clients}
-                fetch={this.fetchClients}
-                token={this.props.token}
-                editUpdateClient={this.editUpdateClient}
-                updateOn={this.updateOn}
-                createOrder={this.props.createOrder}
-                setCreateOrder={this.props.setCreateOrder}
-                openModal={this.openModal}
-              />
-            </Col>
-            {this.state.updateActive ? (
-              <ClientUpdate
-                editClients={this.state.editClients}
-                updateOff={this.updateOff}
-                token={this.props.token}
-                fetch={this.fetchClients}
-              />
-            ) : (
-              <></>
-            )}
-          </Row>
+          <div>
+            <Row>
+              <Col md="3">
+                <CreateClient
+                  token={this.props.token}
+                  fetch={this.fetchClients}
+                />
+              </Col>
+              <Col md="9">
+                <ClientTable
+                  clientArray={this.state.clients}
+                  fetch={this.fetchClients}
+                  token={this.props.token}
+                  editUpdateClient={this.editUpdateClient}
+                  updateOn={this.updateOn}
+                  createOrder={this.props.createOrder}
+                  setCreateOrder={this.props.setCreateOrder}
+                  openModal={this.openModal}
+                />
+              </Col>
+              {this.state.updateActive ? (
+                <ClientUpdate
+                  editClients={this.state.editClients}
+                  updateOff={this.updateOff}
+                  token={this.props.token}
+                  fetch={this.fetchClients}
+                />
+              ) : (
+                <></>
+              )}
+            </Row>
+          </div>
         </Container>
       </div>
     );
