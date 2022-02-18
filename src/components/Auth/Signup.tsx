@@ -96,7 +96,7 @@ class Signup extends React.Component<Props, State> {
   render() {
     return (
       <div>
-        <h3 className="title">New Account</h3>
+        <h3 className="title">Create Account</h3>
         <Form
           inline
           onSubmit={(e) => {
@@ -136,9 +136,9 @@ class Signup extends React.Component<Props, State> {
               </Button>
               <List type="unstyled" className="passwordReq">
                 <li>Password Requirements:</li>
-                <li>At least 8 characters</li>
-                <li>A mixture of both uppercase and lowercase letters.</li>
-                <li>A mixture of letters and numbers.</li>
+                <li>8 character minimum</li>
+                <li>Both uppercase and lowercase letters.</li>
+                <li>Both letters and numbers.</li>
               </List>
             </FormText>
             <FormFeedback>

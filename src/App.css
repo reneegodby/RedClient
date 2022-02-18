@@ -2,15 +2,17 @@
   text-align: center;
 }
 
+/* Navbar */
 .navbarButton {
   margin-right: 10px !important;
   background-color: white !important;
-  color: black !important;
+  color: rgb(107, 98, 98) !important;
   font-family: "Berkshire Swash", cursive;
   text-decoration: none !important;
+  border: 1px lightgray solid!important;
 }
 
-/* Sign up Box */
+/* Signup/Login Pg */
 .auth-container {
   display: flex;
   justify-content: center;
@@ -27,8 +29,26 @@
   justify-content: center;
   height: 20vw;
 }
+.centerForm{
+text-align: center;
+}
 
-/* Main pg background */
+.welcomeP {
+  margin-top: 3vw;
+  padding: 1vw;
+  font-size: 2vw;
+  color: rgb(207, 20, 115);
+  background-color: rgba(245, 245, 245, 0.705);
+  border-radius: 10px;
+  font-family: "Berkshire Swash", cursive;
+}
+
+.passwordReq {
+  font-weight: bold;
+}
+
+
+/* Background Images*/
 .background {
   background-image: url(/src/assets/AdobeStock_216767241.jpeg);
   background-repeat: no-repeat;
@@ -53,7 +73,7 @@
   min-width: 100%;
 }
 
-/* SignUp box title */
+/* Whole app styled */
 .title {
   margin-top: 0;
   margin-bottom: 4vh;
@@ -69,28 +89,22 @@
   justify-content: center;
   align-items: center;
   background-color: rgb(207, 20, 115) !important;
-  /* margin-top: 2vh; */
   margin: 5px;
   font-family: "Berkshire Swash", cursive;
+  text-align: center;
 }
 
-.welcomeP {
-  margin-top: 3vw;
-  padding: 1vw;
-  font-size: 2vw;
-  color: rgb(207, 20, 115);
-  background-color: rgba(245, 245, 245, 0.705);
-  border-radius: 10px;
+/* Modals */
+.modals {
+  background-color: rgba(30, 204, 204, 0.842) !important;
   font-family: "Berkshire Swash", cursive;
+  font-size: larger;
+  color: rgb(107, 98, 98) !important;
 }
-
-.passwordReq {
-  /* color: black; */
-  font-weight: bold;
-}
-
+/* Tables */
 .mb-3 {
   border-radius: 10px !important;
+  text-align: center;
 }
 
 .table {
@@ -119,6 +133,7 @@ th {
   border-bottom: 1px lightgray solid !important;
   font-family: "Berkshire Swash", cursive;
   font-size: larger;
+  color: rgb(107, 98, 98) !important;
 }
 
 td {
@@ -137,13 +152,9 @@ td {
   font-family: "Berkshire Swash", cursive;
 }
 
-.modals {
-  background-color: rgba(30, 204, 204, 0.842) !important;
-  font-family: "Berkshire Swash", cursive;
-  font-size: larger;
-}
-
+/* New Client Form */
 .clientForm {
   font-family: "Berkshire Swash", cursive;
   font-size: larger;
+  color: rgb(107, 98, 98) !important;
 }

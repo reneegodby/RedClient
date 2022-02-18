@@ -94,7 +94,7 @@ class Login extends React.Component<Props, State> {
     return (
       <div>
         <h3 className="title">Login</h3>
-        <Form
+        <Form className="centerForm"
           inline
           onSubmit={(e) => {
             e.preventDefault();
@@ -121,10 +121,10 @@ class Login extends React.Component<Props, State> {
               value={this.state.password}
               name="password"
             />
+          </FormGroup>
             <FormFeedback>
               {this.state.message !== "" ? <p>{this.state.message}</p> : ""}
             </FormFeedback>
-          </FormGroup>
           <Button className="mainBtns" type="submit">
             Login
           </Button>
