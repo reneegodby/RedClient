@@ -15,7 +15,16 @@ type Props = {
   update: (newToken: string) => void;
   sessionToken: string;
 };
-class Login extends React.Component<Props, any> {
+
+type State = {
+  role: string;
+  email: string;
+  password: string;
+  message: string;
+  responseCode: number;
+  _isMounted: boolean;
+};
+class Login extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
@@ -93,19 +102,19 @@ class Login extends React.Component<Props, any> {
           }}
         >
           <FormGroup>
-            <Input 
-            bsSize="sm"
-            className="mb-3"
+            <Input
+              bsSize="sm"
+              className="mb-3"
               type="email"
               placeholder="Email"
               onChange={(e) => this.setState({ email: e.target.value })}
               value={this.state.email}
-               />
+            />
           </FormGroup>
           <FormGroup>
             <Input
-            bsSize="sm"
-            className="mb-3"
+              bsSize="sm"
+              className="mb-3"
               type="password"
               placeholder="Password"
               onChange={(e) => this.setState({ password: e.target.value })}
@@ -116,7 +125,9 @@ class Login extends React.Component<Props, any> {
               {this.state.message !== "" ? <p>{this.state.message}</p> : ""}
             </FormFeedback>
           </FormGroup>
-          <Button className="mainBtns" type="submit">Login</Button>
+          <Button className="mainBtns" type="submit">
+            Login
+          </Button>
         </Form>
         {this.state.responseCode === 200 &&
         this.props.sessionToken.length > 0 ? (

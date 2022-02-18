@@ -86,9 +86,9 @@ class ClientUpdate extends React.Component<ClientProps, ClientState> {
 
   render() {
     return (
-      <Modal isOpen={true}>
-        <ModalHeader>Edit Client Information</ModalHeader>
-        <ModalBody>
+      <Modal className="modals" isOpen={true}>
+        <ModalHeader className="title">Edit Client Information</ModalHeader>
+        <ModalBody className="modals">
           <Form
             inline
             onSubmit={(e) => {
@@ -142,9 +142,9 @@ class ClientUpdate extends React.Component<ClientProps, ClientState> {
                 onChange={(e) => this.setState({ editNotes: e.target.value })}
               ></Input>
             </FormGroup>
-            <Button type="submit">Save</Button>
+            <Button className="mainBtns" type="submit">Save</Button>
           </Form>
-          <Button type="reset" onClick={this.close}>
+          <Button className="mainBtns" type="reset" onClick={this.close}>
             Close
           </Button>
         </ModalBody>

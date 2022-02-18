@@ -58,9 +58,8 @@ class Auth extends React.Component<Props, State> {
         </Container>
 
         <Container className="auth-container">
-          <div className="welcomeBox">
-          {/* <p> Welcome to B&L Sweet Treats</p>
-          <p className="welcomeP">A handy order tracker for home business bakers</p> */}
+          <div>
+                    <p className="welcomeP">A handy order tracker for home business bakers</p> 
           </div>
         </Container>
       </div>

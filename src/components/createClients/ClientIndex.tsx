@@ -35,6 +35,8 @@ export interface ClientIndexState {
   updateModal: boolean;
 }
 
+
+
 class ClientIndex extends React.Component<ClientIndexProps, any> {
   constructor(props: ClientIndexProps) {
     super(props);

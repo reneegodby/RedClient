@@ -85,9 +85,9 @@ class OrderUpdate extends React.Component<OrderProps, OrderState> {
 
   render() {
     return (
-      <Modal isOpen={true}>
-        <ModalHeader>Edit Order Information</ModalHeader>
-        <ModalBody>
+      <Modal className="modals" isOpen={true}>
+        <ModalHeader className="title">Edit Order Information</ModalHeader>
+        <ModalBody className="modals">
           <Form
             inline
             onSubmit={(e) => {
@@ -139,16 +139,17 @@ class OrderUpdate extends React.Component<OrderProps, OrderState> {
                 onChange={(e) => this.setState({ editNotes: e.target.value })}
               ></Input>
             </FormGroup>
-            <FormGroup>
+            {/* <FormGroup>
               <Label htmlFor="image">Image: </Label>
               <Input
                 name="image"
                 value={this.state.editImage}
                 onChange={(e) => this.setState({ editImage: e.target.value })}
               ></Input>
-            </FormGroup>
-            <Button type="submit">Save</Button>
+            </FormGroup> */}
+            <Button className="mainBtns" type="submit">Save</Button>
           </Form>
+          
         </ModalBody>
       </Modal>
     );

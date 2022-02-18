@@ -25,6 +25,10 @@ Client:
 - [2/12/22]: created modals & deployed to heroku
 - [2/13/22]: debugged 
 - [2/15/22]: fixed routes and buttons 
+- [2/16/22]: got everything working
+- [2/17/22]: styling 
+- []: 
+
 
 - []:  
 

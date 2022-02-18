@@ -2,9 +2,12 @@
   text-align: center;
 }
 
-/* Navbar */
 .navbarButton {
-  margin-right: 10px;
+  margin-right: 10px !important;
+  background-color: white !important;
+  color: black !important;
+  font-family: "Berkshire Swash", cursive;
+  text-decoration: none !important;
 }
 
 /* Sign up Box */
@@ -22,7 +25,6 @@
 .logo {
   display: flex;
   justify-content: center;
-  /* width: 50vw; */
   height: 20vw;
 }
 
@@ -35,16 +37,16 @@
   min-width: 100%;
 }
 
-.backgroundClients{
-  background-image: url(/src/assets/AdobeStock_255195597_Preview.jpeg);
+.backgroundClients {
+  background-image: url(/src/assets/pinkSprinkles.jpeg);
   background-repeat: no-repeat;
   background-size: cover;
-  height: 100vh;
+  height: 100%;
   min-width: 100%;
 }
 
-.backgroundOrders{
-  background-image: url(/src/assets/AdobeStock_222036336_Preview.jpeg);
+.backgroundOrders {
+  background-image: url(/src/assets/cookies.jpeg);
   background-repeat: no-repeat;
   background-size: cover;
   height: 100vh;
@@ -55,50 +57,93 @@
 .title {
   margin-top: 0;
   margin-bottom: 4vh;
-  color: rgb(207,20,115);
-  font-family: 'Berkshire Swash', cursive;
+  color: rgb(207, 20, 115);
+  font-family: "Berkshire Swash", cursive;
   font-weight: bold;
   text-align: center;
-  font-size: 2vw;
+  font-size: xx-large;
 }
 
 .mainBtns {
   display: flex;
   justify-content: center;
-  align-items: center ;
-  background-color: rgb(207,20,115)!important;
+  align-items: center;
+  background-color: rgb(207, 20, 115) !important;
   /* margin-top: 2vh; */
+  margin: 5px;
+  font-family: "Berkshire Swash", cursive;
 }
 
-.welcomeBox {
- margin-top: 50px;
- text-align: center;
- font-family: 'Berkshire Swash', cursive;
-  border-radius: 20px;
- padding: 1vw;
- width: 100%;
- /* border: white dotted 8px; */
- /* color: rgb(207,20,115); */
- font-size: 4vw;
-  
+.welcomeP {
+  margin-top: 3vw;
+  padding: 1vw;
+  font-size: 2vw;
+  color: rgb(207, 20, 115);
+  background-color: rgba(245, 245, 245, 0.705);
+  border-radius: 10px;
+  font-family: "Berkshire Swash", cursive;
 }
 
-.welcomeP{
-  font-size: 3vw;
-}
-
-.passwordReq{
+.passwordReq {
   /* color: black; */
   font-weight: bold;
 }
 
-.mb-3{
-  border-radius: 10px!important;
+.mb-3 {
+  border-radius: 10px !important;
 }
 
-.orderTable{
-  display: flex;
-  justify-content: center;
-  text-align: center;
-  
+.table {
+  margin-left: 8vw !important;
+  margin-right: auto !important;
+  text-align: center !important;
+  border: 2px solid lightgrey !important;
+}
+
+.table2 {
+  margin-left: auto !important;
+  margin-right: auto !important;
+  text-align: center !important;
+  border: 2px solid lightgrey !important;
+  margin-top: 2vh !important;
+}
+
+th {
+  margin-left: auto !important;
+  margin-right: auto !important;
+  text-align: center !important;
+  border: 1px lightgrey solid !important;
+  padding: 10px !important;
+  background-color: aliceblue !important;
+  max-width: 1vw;
+  border-bottom: 1px lightgray solid !important;
+  font-family: "Berkshire Swash", cursive;
+  font-size: larger;
+}
+
+td {
+  margin-left: auto !important;
+  margin-right: auto !important;
+  text-align: center !important;
+  border: 1px lightgrey solid !important;
+  padding: 10px !important;
+  background-color: rgba(240, 248, 255, 0.5) !important;
+  max-width: 1vw;
+}
+
+.actionBtns {
+  margin: 5px;
+  background-color: rgb(207, 20, 115) !important;
+  font-family: "Berkshire Swash", cursive;
+}
+
+.modals {
+  background-color: rgba(30, 204, 204, 0.842) !important;
+  font-family: "Berkshire Swash", cursive;
+  font-size: larger;
+}
+
+.clientForm {
+  font-family: "Berkshire Swash", cursive;
+  font-size: larger;
 }

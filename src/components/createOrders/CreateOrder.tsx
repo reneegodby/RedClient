@@ -114,9 +114,9 @@ class CreateOrder extends React.Component<Props, any> {
 
   render() {
     return (
-      <Modal isOpen={this.props.updateModal}>
-        <ModalHeader>Create Order</ModalHeader>
-        <ModalBody>
+      <Modal className="modals" isOpen={this.props.updateModal}>
+        <ModalHeader className="title">Create Order</ModalHeader>
+        <ModalBody className="modals">
           <Form
             inline
             onSubmit={(e) => {
@@ -174,7 +174,7 @@ class CreateOrder extends React.Component<Props, any> {
                 {" "}
               </Input>
             </FormGroup>
-            <FormGroup>
+            {/* <FormGroup>
               <Label htmlFor="image">Image: </Label>
               <Input
                 name="image"
@@ -183,10 +183,10 @@ class CreateOrder extends React.Component<Props, any> {
               >
                 {" "}
               </Input>
-            </FormGroup>
-            <Button type="submit">Save</Button>
+            </FormGroup> */}
+            <Button className="mainBtns" type="submit">Save</Button>
           </Form>
-          <Button type="reset" onClick={this.close}>
+          <Button className="mainBtns" type="reset" onClick={this.close}>
             Close
           </Button>
         </ModalBody>

@@ -2,6 +2,7 @@ import APIURL from "../../helpers/environment";
 import React from "react";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+// import { Navigate } from "react-router-dom";
 
 type Props = {
   token: string;
@@ -92,7 +93,7 @@ class CreateClient extends React.Component<Props, State> {
     return (
       <div>
         <h2 className="title">Create New Client</h2>
-        <Form
+        <Form className="clientForm"
           inline
           onSubmit={(e) => {
             e.preventDefault();
@@ -102,6 +103,8 @@ class CreateClient extends React.Component<Props, State> {
           <FormGroup>
             <Label htmlFor="firstName">First Name: </Label>
             <Input
+            bsSize="sm"
+            className="mb-3"
               name="firstName"
               value={this.state.firstName}
               onChange={(e) => this.setState({ firstName: e.target.value })}
@@ -112,6 +115,8 @@ class CreateClient extends React.Component<Props, State> {
           <FormGroup>
             <Label htmlFor="lastName">Last Name: </Label>
             <Input
+            bsSize="sm"
+            className="mb-3"
               name="lastName"
               value={this.state.lastName}
               onChange={(e) => this.setState({ lastName: e.target.value })}
@@ -122,6 +127,8 @@ class CreateClient extends React.Component<Props, State> {
           <FormGroup>
             <Label htmlFor="phoneNumber">Phone Number: </Label>
             <Input
+            bsSize="sm"
+            className="mb-3"
               name="phoneNumber"
               value={this.state.phoneNumber}
               onChange={(e) => this.setState({ phoneNumber: e.target.value })}
@@ -132,6 +139,8 @@ class CreateClient extends React.Component<Props, State> {
           <FormGroup>
             <Label htmlFor="address">Address: </Label>
             <Input
+            bsSize="sm"
+            className="mb-3"
               name="address"
               value={this.state.address}
               onChange={(e) => this.setState({ address: e.target.value })}
@@ -142,6 +151,8 @@ class CreateClient extends React.Component<Props, State> {
           <FormGroup>
             <Label htmlFor="notes">Notes: </Label>
             <Input
+            bsSize="sm"
+            className="mb-3"
               name="notes"
               value={this.state.notes}
               onChange={(e) => this.setState({ notes: e.target.value })}
@@ -149,7 +160,7 @@ class CreateClient extends React.Component<Props, State> {
               {" "}
             </Input>
           </FormGroup>
-          <Button type="submit">Save</Button>
+          <Button className="mainBtns" type="submit">Save</Button>
         </Form>
       </div>
     );

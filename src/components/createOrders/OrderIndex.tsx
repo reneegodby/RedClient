@@ -96,8 +96,8 @@ class OrderIndex extends React.Component<Props, any> {
           tokenUpdate={this.props.tokenUpdate}
         />
           <h3 className="title">My Orders</h3>
-        <Container>
-          <Row className="orderTable">
+        <Container >
+          <Row >
             <Col md="9">
               <OrderTable
                 orders={this.state.orders}

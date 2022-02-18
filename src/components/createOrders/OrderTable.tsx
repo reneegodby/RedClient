@@ -56,67 +56,63 @@ class OrderTable extends React.Component<OrderTableProps, OrderTableState> {
     });
   }
 
-  // componentWillUnmount() {
-  //   this.setState({
-  //     _isMounted: false,
-  //   });
-  // }
-
   orderMapper = () => {
     console.log("orderMapper");
     console.log(this.props.orders);
 
     return this.props.orders?.map((order: any, index: number) => {
       return (
-        <Table bordered responsive striped >
-          <thead>
-            <tr key={index}>
-              {/* <th>Client ID</th> */}
-              <th scope="row">Client Name</th>
-              <th>Type of Order </th>
-              <th>Quantity</th>
-              <th>Due Date</th>
-              <th>Price</th>
-              <th>Notes</th>
-              <th>Image</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              {/* <td>{index}</td> */}
-              <td>
-                {order.client.firstName} {order.client.lastName}
-              </td>
-              <td>{order.typeOfOrder}</td>
-              <td>{order.quantity}</td>
-              <td>{order.dueDate}</td>
-              <td>{order.price}</td>
-              <td>{order.notes}</td>
-              <td>{order.image}</td>
-              <span>
-                <Button
-                  size="sm"
-                  onClick={() => {
-                    this.props.editUpdateOrder(order);
-                    this.props.updateOn();
-                  }}
-                >
-                  Update
-                </Button>
-              </span>
-              <span>
-                <Button
-                  size="sm"
-                  onClick={() => {
-                    this.deleteOrder(order);
-                  }}
-                >
-                  Delete{" "}
-                </Button>
-              </span>
-            </tr>
-          </tbody>
-        </Table>
+        <div>
+          <table className="table" >
+            <thead>
+              <tr key={index}>
+                {/* <th>Client ID</th> */}
+                <th>Client Name</th>
+                <th>Type of Order </th>
+                <th>Quantity</th>
+                <th>Due Date</th>
+                <th>Price</th>
+                <th>Notes</th>
+                {/* <th>Image</th> */}
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                {/* <td>{index}</td> */}
+                <td>
+                  {order.client.firstName} {order.client.lastName}
+                </td>
+                <td>{order.typeOfOrder}</td>
+                <td>{order.quantity}</td>
+                <td>{order.dueDate}</td>
+                <td>{order.price}</td>
+                <td>{order.notes}</td>
+                {/* <td>{order.image}</td> */}
+                <td>
+                  <Button className="actionBtns"
+                    size="sm"
+                    onClick={() => {
+                      this.props.editUpdateOrder(order);
+                      this.props.updateOn();
+                    }}
+                  >
+                    Update
+                  </Button>
+
+                  <Button className="actionBtns"
+                    size="sm"
+                    onClick={() => {
+                      this.deleteOrder(order);
+                    }}
+                  >
+                    Delete{" "}
+                  </Button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       );
     });
   };

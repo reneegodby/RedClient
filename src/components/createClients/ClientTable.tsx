@@ -71,60 +71,62 @@ class ClientTable extends React.Component<ClientTableProps, ClientTableState> {
 
     return this.props.clientArray.map((client: any, index: number) => {
       return (
-        <Table bordered responsive striped>
-          <thead>
-            <tr key={index}>
-              <th>First Name</th>
-              <th>Last Name</th>
-              <th>Phone Number</th>
-              <th>Address</th>
-              <th>Notes</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>{client.firstName}</td>
-              <td>{client.lastName}</td>
-              <td>{client.phoneNumber}</td>
-              <td>{client.address}</td>
-              <td>{client.notes}</td>
+        
+          <table className="table2">
+            <thead>
+              <tr key={index}>
+                <th>Client Name</th>
 
-              <span>
-                <Button
-                  size="sm"
-                  onClick={() => {
-                    this.props.editUpdateClient(client);
-                    this.props.updateOn();
-                  }}
-                >
-                  Update
-                </Button>
-              </span>
-              <span>
-                <Button
-                  size="sm"
-                  onClick={() => {
-                    this.deleteClient(client);
-                  }}
-                >
-                  Delete{" "}
-                </Button>
-              </span>
-              <span>
-                <Button
-                  size="sm"
-                  onClick={() => {
-                    this.props.editUpdateClient(client);
-                    this.props.openModal();
-                    console.log(client.id);
-                  }}
-                >
-                  Create Order
-                </Button>
-              </span>
-            </tr>
-          </tbody>
-        </Table>
+                <th>Phone Number</th>
+                <th>Address</th>
+                <th>Notes</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  {client.firstName} <br />
+                  {client.lastName}
+                </td>
+                <td>{client.phoneNumber}</td>
+                <td>{client.address}</td>
+                <td>{client.notes}</td>
+                <td>
+                  <Button className="actionBtns"
+                    size="sm"
+                    onClick={() => {
+                      this.props.editUpdateClient(client);
+                      this.props.updateOn();
+                    }}
+                  >
+                    Update
+                  </Button>
+
+                  <Button className="actionBtns"
+                    size="sm"
+                    onClick={() => {
+                      this.deleteClient(client);
+                    }}
+                  >
+                    Delete{" "}
+                  </Button>
+
+                  <Button className="actionBtns"
+                    size="sm"
+                    onClick={() => {
+                      this.props.editUpdateClient(client);
+                      this.props.openModal();
+                      console.log(client.id);
+                    }}
+                  >
+                    Create Order
+                  </Button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        
       );
     });
   };

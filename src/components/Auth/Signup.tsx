@@ -17,7 +17,16 @@ type Props = {
   update: (newToken: string) => void;
 };
 
-class Signup extends React.Component<Props, any> {
+type State = {
+  role: string;
+  email: string;
+  password: string;
+  message: string;
+  responseCode: number;
+  _isMounted: boolean;
+};
+
+class Signup extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {

@@ -1,7 +1,7 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
-import NavLogo from "../../assets/BrieandlilyTealBanner (1).png"
+import NavLogo from "../../assets/BrieandlilyTealBanner (1).png";
 import {
   Navbar,
   NavbarBrand,
@@ -16,7 +16,12 @@ interface Props {
   tokenUpdate: any;
 }
 
-class SiteBar extends React.Component<Props, any> {
+type State = {
+  isOpen: boolean,
+      hasError: boolean,
+}
+
+class SiteBar extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
@@ -40,22 +45,31 @@ class SiteBar extends React.Component<Props, any> {
       return <h1>Error</h1>;
     }
     return (
-      <div>
-        <Navbar color="faded" light expand="md">
+      <div className="navbar">
+        <Navbar expand="md">
           <NavbarBrand>
-            <img src={NavLogo} alt="logo" style={{width: 120}}/>
+            <img src={NavLogo} alt="logo" style={{ width: 120 }} />
           </NavbarBrand>
 
           <Collapse navbar>
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <Button className="navbarButton" onClick={() => this.props.clickLogout()}>Logout</Button>
+                <Button
+                  className="navbarButton"
+                  onClick={() => this.props.clickLogout()}
+                >
+                  Logout
+                </Button>
               </NavItem>
               <NavItem>
-                <Button className="navbarButton"><Link to ='/clients'>Clients</Link></Button>
+                <Button className="navbarButton">
+                  <Link className="links" to="/clients">Clients</Link>
+                </Button>
               </NavItem>
               <NavItem>
-                <Button className="navbarButton"><Link to ='/orders'>Orders</Link></Button>
+                <Button className="navbarButton">
+                  <Link to="/orders">Orders</Link>
+                </Button>
               </NavItem>
             </Nav>
           </Collapse>
