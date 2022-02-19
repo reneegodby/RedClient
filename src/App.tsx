@@ -1,4 +1,3 @@
-// import APIURL from './helpers/environment'
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import Auth from "./components/Auth/Auth";
@@ -26,12 +25,12 @@ const App: React.FunctionComponent = () => {
   const updateToken = (newToken: string) => {
     localStorage.setItem("token", newToken);
     setSessionToken(newToken);
-    console.log(sessionToken);
+    // console.log(sessionToken);
     navigate("/clients");
   };
 
   const clearToken = () => {
-    console.log("clearToken");
+    // console.log("clearToken");
     localStorage.clear();
     setSessionToken("");
     navigate("/");

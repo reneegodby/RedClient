@@ -35,8 +35,6 @@ export interface ClientIndexState {
   updateModal: boolean;
 }
 
-
-
 class ClientIndex extends React.Component<ClientIndexProps, any> {
   constructor(props: ClientIndexProps) {
     super(props);
@@ -63,7 +61,7 @@ class ClientIndex extends React.Component<ClientIndexProps, any> {
       .then((res) => res.json())
       .then((clientData) => {
         this.setState({ clients: clientData });
-        console.log(clientData);
+        // console.log(clientData);
       })
       .catch((error) =>
         this.setState({
@@ -76,14 +74,14 @@ class ClientIndex extends React.Component<ClientIndexProps, any> {
     this.setState({
       newOrder: order,
     });
-    console.log(this.state.newOrder);
+    // console.log(this.state.newOrder);
   };
 
   editUpdateClient = (client: Clients) => {
     this.setState({
       editClients: client,
     });
-    console.log(this.state.editClients);
+    // console.log(this.state.editClients);
   };
 
   openModal = () => {
@@ -115,7 +113,7 @@ class ClientIndex extends React.Component<ClientIndexProps, any> {
     this.setState({
       _isMounted: true,
     });
-    console.log(this.props.token);
+    // console.log(this.props.token);
   }
 
   componentWillUnmount() {
@@ -124,8 +122,8 @@ class ClientIndex extends React.Component<ClientIndexProps, any> {
     });
   }
   render() {
-    console.log("ClientIndex render");
-    console.log(this.state);
+    // console.log("ClientIndex render");
+    // console.log(this.state);
     return (
       <div className="backgroundClients">
         <SiteBar

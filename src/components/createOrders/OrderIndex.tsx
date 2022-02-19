@@ -32,7 +32,7 @@ class OrderIndex extends React.Component<Props, any> {
   }
   //Get all orders
   fetchOrders = () => {
-    console.log("fetch Orders", this.props.token);
+    // console.log("fetch Orders", this.props.token);
 
     fetch(`${APIURL}/orders/`, {
       method: "GET",
@@ -44,13 +44,13 @@ class OrderIndex extends React.Component<Props, any> {
       .then((res) => res.json())
       .then((orderData) => {
         this.setState({ orders: orderData });
-        console.log(orderData);
+        // console.log(orderData);
       })
       .catch((error) => {
         this.setState({
           error: true,
         });
-        console.log(error);
+        // console.log(error);
       });
   };
 
@@ -58,7 +58,7 @@ class OrderIndex extends React.Component<Props, any> {
     this.setState({
       editOrders: order,
     });
-    console.log(this.state.editOrders);
+    // console.log(this.state.editOrders);
   };
 
   updateOn = () => {
@@ -75,29 +75,22 @@ class OrderIndex extends React.Component<Props, any> {
 
   componentDidMount() {
     this.fetchOrders();
-    // this.setState({
-    //   _isMounted: true,
-    // });
   }
 
-  componentWillUnmount() {
-    // this.setState({
-    //   _isMounted: false,
-    // });
-  }
+  componentWillUnmount() {}
 
   render() {
-    console.log("OrderIndex render");
-    console.log(this.state);
+    // console.log("OrderIndex render");
+    // console.log(this.state);
     return (
       <div className="backgroundOrders">
         <SiteBar
           clickLogout={this.props.clickLogout}
           tokenUpdate={this.props.tokenUpdate}
         />
-          <h3 className="title">My Orders</h3>
-        <Container >
-          <Row >
+        <h3 className="title">My Orders</h3>
+        <Container>
+          <Row>
             <Col md="9">
               <OrderTable
                 orders={this.state.orders}

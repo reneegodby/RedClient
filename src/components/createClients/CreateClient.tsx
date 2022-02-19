@@ -29,17 +29,17 @@ class CreateClient extends React.Component<Props, State> {
       notes: "",
       _isMounted: false,
     };
-    console.log(this.props.token);
+    // console.log(this.props.token);
   }
 
   handleSubmit = () => {
-    console.log(
-      this.state.firstName,
-      this.state.lastName,
-      this.state.phoneNumber,
-      this.state.address,
-      this.state.notes
-    );
+    // console.log(
+    //   this.state.firstName,
+    //   this.state.lastName,
+    //   this.state.phoneNumber,
+    //   this.state.address,
+    //   this.state.notes
+    // );
 
     fetch(`${APIURL}/clients/client`, {
       method: "POST",
@@ -59,10 +59,10 @@ class CreateClient extends React.Component<Props, State> {
     })
       .then((res) => {
         res.json();
-        console.log(res);
+        // console.log(res);
       })
       .then((clientData) => {
-        console.log(clientData);
+        // console.log(clientData);
         this.setState({
           firstName: "",
           lastName: "",
@@ -73,7 +73,7 @@ class CreateClient extends React.Component<Props, State> {
         this.props.fetch();
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   };
 
@@ -91,9 +91,10 @@ class CreateClient extends React.Component<Props, State> {
 
   render() {
     return (
-      <div>
+      <div className="newClient">
         <h2 className="title">Create New Client</h2>
-        <Form className="clientForm"
+        <Form
+          className="clientForm"
           inline
           onSubmit={(e) => {
             e.preventDefault();
@@ -103,64 +104,56 @@ class CreateClient extends React.Component<Props, State> {
           <FormGroup>
             <Label htmlFor="firstName">First Name: </Label>
             <Input
-            bsSize="sm"
-            className="mb-3"
+              bsSize="sm"
+              className="mb-3"
               name="firstName"
               value={this.state.firstName}
               onChange={(e) => this.setState({ firstName: e.target.value })}
-            >
-              {" "}
-            </Input>
+            ></Input>
           </FormGroup>
           <FormGroup>
             <Label htmlFor="lastName">Last Name: </Label>
             <Input
-            bsSize="sm"
-            className="mb-3"
+              bsSize="sm"
+              className="mb-3"
               name="lastName"
               value={this.state.lastName}
               onChange={(e) => this.setState({ lastName: e.target.value })}
-            >
-              {" "}
-            </Input>
+            ></Input>
           </FormGroup>
           <FormGroup>
             <Label htmlFor="phoneNumber">Phone Number: </Label>
             <Input
-            bsSize="sm"
-            className="mb-3"
+              bsSize="sm"
+              className="mb-3"
               name="phoneNumber"
               value={this.state.phoneNumber}
               onChange={(e) => this.setState({ phoneNumber: e.target.value })}
-            >
-              {" "}
-            </Input>
+            ></Input>
           </FormGroup>
           <FormGroup>
             <Label htmlFor="address">Address: </Label>
             <Input
-            bsSize="sm"
-            className="mb-3"
+              bsSize="sm"
+              className="mb-3"
               name="address"
               value={this.state.address}
               onChange={(e) => this.setState({ address: e.target.value })}
-            >
-              {" "}
-            </Input>
+            ></Input>
           </FormGroup>
           <FormGroup>
             <Label htmlFor="notes">Notes: </Label>
             <Input
-            bsSize="sm"
-            className="mb-3"
+              bsSize="sm"
+              className="mb-3"
               name="notes"
               value={this.state.notes}
               onChange={(e) => this.setState({ notes: e.target.value })}
-            >
-              {" "}
-            </Input>
+            ></Input>
           </FormGroup>
-          <Button className="mainBtns" type="submit">Save</Button>
+          <Button className="mainBtns" type="submit">
+            Save
+          </Button>
         </Form>
       </div>
     );

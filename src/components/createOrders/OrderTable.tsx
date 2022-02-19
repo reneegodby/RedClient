@@ -1,6 +1,6 @@
 import APIURL from "../../helpers/environment";
 import React from "react";
-import { Button, Table, Row } from "reactstrap";
+import { Button, Row } from "reactstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Orders } from "./OrderIndex";
 
@@ -34,7 +34,7 @@ class OrderTable extends React.Component<OrderTableProps, OrderTableState> {
 
   //Delete Order
   deleteOrder = (order: Orders) => {
-    console.log(order);
+    // console.log(order);
 
     fetch(`${APIURL}/orders/delete/${order.orderId}`, {
       method: "DELETE",
@@ -45,7 +45,7 @@ class OrderTable extends React.Component<OrderTableProps, OrderTableState> {
     })
       .then(() => this.props.fetchOrders())
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   };
 
@@ -57,13 +57,13 @@ class OrderTable extends React.Component<OrderTableProps, OrderTableState> {
   }
 
   orderMapper = () => {
-    console.log("orderMapper");
-    console.log(this.props.orders);
+    // console.log("orderMapper");
+    // console.log(this.props.orders);
 
     return this.props.orders?.map((order: any, index: number) => {
       return (
         <div>
-          <table className="table" >
+          <table className="table">
             <thead>
               <tr key={index}>
                 {/* <th>Client ID</th> */}
@@ -73,7 +73,7 @@ class OrderTable extends React.Component<OrderTableProps, OrderTableState> {
                 <th>Due Date</th>
                 <th>Price</th>
                 <th>Notes</th>
-                {/* <th>Image</th> */}
+                <th>Image</th>
                 <th>Actions</th>
               </tr>
             </thead>
@@ -88,9 +88,10 @@ class OrderTable extends React.Component<OrderTableProps, OrderTableState> {
                 <td>{order.dueDate}</td>
                 <td>{order.price}</td>
                 <td>{order.notes}</td>
-                {/* <td>{order.image}</td> */}
+                <td>{order.image}</td>
                 <td>
-                  <Button className="actionBtns"
+                  <Button
+                    className="actionBtns"
                     size="sm"
                     onClick={() => {
                       this.props.editUpdateOrder(order);
@@ -100,7 +101,8 @@ class OrderTable extends React.Component<OrderTableProps, OrderTableState> {
                     Update
                   </Button>
 
-                  <Button className="actionBtns"
+                  <Button
+                    className="actionBtns"
                     size="sm"
                     onClick={() => {
                       this.deleteOrder(order);
@@ -118,8 +120,8 @@ class OrderTable extends React.Component<OrderTableProps, OrderTableState> {
   };
 
   render() {
-    console.log("table render");
-    console.log(this.state.orderProps);
+    // console.log("table render");
+    // console.log(this.state.orderProps);
     return (
       <div>
         <Row>{this.orderMapper()}</Row>

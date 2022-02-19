@@ -1,6 +1,6 @@
 import APIURL from "../../helpers/environment";
 import React from "react";
-import { Button, Table, Row } from "reactstrap";
+import { Button, Row } from "reactstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Clients } from "./ClientIndex";
 import { ClientIndexProps } from "../createClients/ClientIndex";
@@ -38,7 +38,7 @@ class ClientTable extends React.Component<ClientTableProps, ClientTableState> {
 
   //Delete Client
   deleteClient = (client: Clients) => {
-    console.log(client);
+    // console.log(client);
     fetch(`${APIURL}/clients/delete/${client.id}`, {
       method: "DELETE",
       headers: new Headers({
@@ -48,7 +48,7 @@ class ClientTable extends React.Component<ClientTableProps, ClientTableState> {
     })
       .then(() => this.props.fetch())
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   };
 
@@ -66,74 +66,75 @@ class ClientTable extends React.Component<ClientTableProps, ClientTableState> {
   }
 
   clientMapper = () => {
-    console.log("clientMapper");
-    console.log(this.props.clientArray);
+    // console.log("clientMapper");
+    // console.log(this.props.clientArray);
 
     return this.props.clientArray.map((client: any, index: number) => {
       return (
-        
-          <table className="table2">
-            <thead>
-              <tr key={index}>
-                <th>Client Name</th>
+        <table className="table2">
+          <thead>
+            <tr key={index}>
+              <th>Client Name</th>
 
-                <th>Phone Number</th>
-                <th>Address</th>
-                <th>Notes</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  {client.firstName} <br />
-                  {client.lastName}
-                </td>
-                <td>{client.phoneNumber}</td>
-                <td>{client.address}</td>
-                <td>{client.notes}</td>
-                <td>
-                  <Button className="actionBtns"
-                    size="sm"
-                    onClick={() => {
-                      this.props.editUpdateClient(client);
-                      this.props.updateOn();
-                    }}
-                  >
-                    Update
-                  </Button>
+              <th>Phone Number</th>
+              <th>Address</th>
+              <th>Notes</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                {client.firstName} <br />
+                {client.lastName}
+              </td>
+              <td>{client.phoneNumber}</td>
+              <td>{client.address}</td>
+              <td>{client.notes}</td>
+              <td>
+                <Button
+                  className="actionBtns"
+                  size="sm"
+                  onClick={() => {
+                    this.props.editUpdateClient(client);
+                    this.props.updateOn();
+                  }}
+                >
+                  Update
+                </Button>
 
-                  <Button className="actionBtns"
-                    size="sm"
-                    onClick={() => {
-                      this.deleteClient(client);
-                    }}
-                  >
-                    Delete{" "}
-                  </Button>
+                <Button
+                  className="actionBtns"
+                  size="sm"
+                  onClick={() => {
+                    this.deleteClient(client);
+                  }}
+                >
+                  Delete{" "}
+                </Button>
 
-                  <Button className="actionBtns"
-                    size="sm"
-                    onClick={() => {
-                      this.props.editUpdateClient(client);
-                      this.props.openModal();
-                      console.log(client.id);
-                    }}
-                  >
-                    Create Order
-                  </Button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        
+                <Button
+                  className="actionBtns"
+                  size="sm"
+                  onClick={() => {
+                    this.props.editUpdateClient(client);
+                    this.props.openModal();
+                    // console.log(client.id);
+                  }}
+                >
+                  Create Order
+                </Button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       );
     });
   };
 
   render() {
-    console.log("table render");
-    console.log(this.state.clientProps);
+    // console.log("table render");
+    // console.log(this.state.clientProps);
     return (
       <div>
         <h3 className="title">My Clients</h3>

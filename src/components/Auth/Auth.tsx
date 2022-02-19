@@ -27,11 +27,11 @@ class Auth extends React.Component<Props, State> {
   }
 
   componentDidCatch(error: any, errorInfo: any) {
-    console.log(error, errorInfo);
+    // console.log(error, errorInfo);
   }
 
   render() {
-    console.log("Auth render");
+    // console.log("Auth render");
     if (this.state.hasError) {
       return <h1>Error</h1>;
     }
@@ -59,7 +59,9 @@ class Auth extends React.Component<Props, State> {
 
         <Container className="auth-container">
           <div>
-                    <p className="welcomeP">A handy order tracker for home business bakers</p> 
+            <p className="welcomeP">
+              A handy order tracker for home business bakers
+            </p>
           </div>
         </Container>
       </div>

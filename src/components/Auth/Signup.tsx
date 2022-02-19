@@ -2,7 +2,6 @@ import APIURL from "../../helpers/environment";
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {
-  Label,
   Form,
   FormGroup,
   Input,
@@ -11,7 +10,6 @@ import {
   FormText,
   List,
 } from "reactstrap";
-import { Navigate } from "react-router-dom";
 
 type Props = {
   update: (newToken: string) => void;
@@ -35,7 +33,6 @@ class Signup extends React.Component<Props, State> {
       message: "",
 
       _isMounted: false,
-      
     };
   }
   componentDidMount = () => {
@@ -46,7 +43,7 @@ class Signup extends React.Component<Props, State> {
 
   handleSubmit = () => {
     let errorCode: number | string;
-    console.log(this.state.email, this.state.password);
+    // console.log(this.state.email, this.state.password);
 
     fetch(`${APIURL}/auth/signup`, {
       method: "POST",
@@ -63,29 +60,29 @@ class Signup extends React.Component<Props, State> {
       }),
     })
       .then((res) => {
-        console.log(`fetch successful ${res}`);
+        // console.log(`fetch successful ${res}`);
 
         errorCode = res.status;
-        console.log(errorCode);
+        // console.log(errorCode);
 
         if (errorCode === 409) {
           this.setState({ message: "Email already in use" });
-          console.log(this.state.message);
+          // console.log(this.state.message);
         } else if (errorCode === 500) {
           this.setState({ message: "User failed to register" });
-          console.log(this.state.message);
+          // console.log(this.state.message);
         }
         return res.json();
       })
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         this.props.update(data.sessionToken);
 
-        console.log(data.sessionToken);
+        // console.log(data.sessionToken);
       });
   };
   validPassword = () => {
-    console.log("valid password");
+    // console.log("valid password");
     return (
       this.state.password.length > 8 &&
       this.state.password.match(/[A-Z]/) !== null &&

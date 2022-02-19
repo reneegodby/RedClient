@@ -75,14 +75,14 @@ class OrderUpdate extends React.Component<OrderProps, OrderState> {
         this.props.updateOff();
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   };
 
   render() {
     return (
       <Modal className="modals" isOpen={true}>
-        <ModalHeader className="title">Edit Order Information</ModalHeader>
+        <ModalHeader className="modalTitle">Edit Order Information</ModalHeader>
         <ModalBody className="modals">
           <Form
             inline

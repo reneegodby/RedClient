@@ -33,11 +33,11 @@ class ClientUpdate extends React.Component<ClientProps, ClientState> {
   constructor(props: ClientProps) {
     super(props);
     this.state = {
-      editFirstName: "",
-      editLastName: "",
-      editPhoneNumber: "",
-      editAddress: "",
-      editNotes: "",
+      editFirstName: this.props.editClients.firstName,
+      editLastName: this.props.editClients.lastName,
+      editPhoneNumber: this.props.editClients.phoneNumber,
+      editAddress: this.props.editClients.address,
+      editNotes: this.props.editClients.notes,
       _isMounted: false,
     };
   }
@@ -47,12 +47,6 @@ class ClientUpdate extends React.Component<ClientProps, ClientState> {
       _isMounted: true,
     });
   }
-
-  // componentWillUnmount() {
-  //   this.setState({
-  //     _isMounted: false,
-  //   });
-  // }
 
   updateClient = () => {
     fetch(`${APIURL}/clients/update/${this.props.editClients.id}`, {
@@ -76,7 +70,7 @@ class ClientUpdate extends React.Component<ClientProps, ClientState> {
         this.props.updateOff();
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   };
 
@@ -87,7 +81,9 @@ class ClientUpdate extends React.Component<ClientProps, ClientState> {
   render() {
     return (
       <Modal className="modals" isOpen={true}>
-        <ModalHeader className="title">Edit Client Information</ModalHeader>
+        <ModalHeader className="modalTitle">
+          Edit Client Information
+        </ModalHeader>
         <ModalBody className="modals">
           <Form
             inline
@@ -142,7 +138,9 @@ class ClientUpdate extends React.Component<ClientProps, ClientState> {
                 onChange={(e) => this.setState({ editNotes: e.target.value })}
               ></Input>
             </FormGroup>
-            <Button className="mainBtns" type="submit">Save</Button>
+            <Button className="mainBtns" type="submit">
+              Save
+            </Button>
           </Form>
           <Button className="mainBtns" type="reset" onClick={this.close}>
             Close

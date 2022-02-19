@@ -44,7 +44,7 @@ class CreateOrder extends React.Component<Props, any> {
       image: "",
       orderPg: false,
     };
-    console.log(this.props.token);
+    // console.log(this.props.token);
   }
 
   //newOrder is changing the state of orderPg
@@ -75,10 +75,10 @@ class CreateOrder extends React.Component<Props, any> {
     })
       .then((res) => {
         res.json();
-        console.log(res);
+        // console.log(res);
       })
       .then((orderData) => {
-        console.log(orderData);
+        // console.log(orderData);
         this.setState({
           typeOfOrder: "",
           quantity: "",
@@ -92,7 +92,7 @@ class CreateOrder extends React.Component<Props, any> {
         this.newOrder(); //sets state to navigate to orders
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   };
 
@@ -115,7 +115,7 @@ class CreateOrder extends React.Component<Props, any> {
   render() {
     return (
       <Modal className="modals" isOpen={this.props.updateModal}>
-        <ModalHeader className="title">Create Order</ModalHeader>
+        <ModalHeader className="modalTitle">Create Order</ModalHeader>
         <ModalBody className="modals">
           <Form
             inline
