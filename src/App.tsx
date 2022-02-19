@@ -27,6 +27,7 @@ const App: React.FunctionComponent = () => {
     localStorage.setItem("token", newToken);
     setSessionToken(newToken);
     console.log(sessionToken);
+    navigate("/clients");
   };
 
   const clearToken = () => {

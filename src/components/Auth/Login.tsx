@@ -94,7 +94,8 @@ class Login extends React.Component<Props, State> {
     return (
       <div>
         <h3 className="title">Login</h3>
-        <Form className="centerForm"
+        <Form
+          className="centerForm"
           inline
           onSubmit={(e) => {
             e.preventDefault();
@@ -122,19 +123,13 @@ class Login extends React.Component<Props, State> {
               name="password"
             />
           </FormGroup>
-            <FormFeedback>
-              {this.state.message !== "" ? <p>{this.state.message}</p> : ""}
-            </FormFeedback>
+          <FormFeedback>
+            {this.state.message !== "" ? <p>{this.state.message}</p> : ""}
+          </FormFeedback>
           <Button className="mainBtns" type="submit">
             Login
           </Button>
         </Form>
-        {this.state.responseCode === 200 &&
-        this.props.sessionToken.length > 0 ? (
-          <Navigate to="/clients" replace={true} />
-        ) : (
-          <></>
-        )}
       </div>
     );
   }

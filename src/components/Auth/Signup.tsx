@@ -22,7 +22,6 @@ type State = {
   email: string;
   password: string;
   message: string;
-  responseCode: number;
   _isMounted: boolean;
 };
 
@@ -34,8 +33,9 @@ class Signup extends React.Component<Props, State> {
       email: "",
       password: "",
       message: "",
-      responseCode: 0,
+
       _isMounted: false,
+      
     };
   }
   componentDidMount = () => {
@@ -64,7 +64,7 @@ class Signup extends React.Component<Props, State> {
     })
       .then((res) => {
         console.log(`fetch successful ${res}`);
-        this.setState({ responseCode: res.status });
+
         errorCode = res.status;
         console.log(errorCode);
 
@@ -80,6 +80,7 @@ class Signup extends React.Component<Props, State> {
       .then((data) => {
         console.log(data);
         this.props.update(data.sessionToken);
+
         console.log(data.sessionToken);
       });
   };
@@ -106,8 +107,8 @@ class Signup extends React.Component<Props, State> {
         >
           <FormGroup>
             <Input
-            bsSize="sm"
-            className="mb-3"
+              bsSize="sm"
+              className="mb-3"
               type="email"
               placeholder="Email"
               onChange={(e) => this.setState({ email: e.target.value })}
@@ -116,8 +117,8 @@ class Signup extends React.Component<Props, State> {
           </FormGroup>
           <FormGroup>
             <Input
-            bsSize="sm"
-            className="mb-3"
+              bsSize="sm"
+              className="mb-3"
               type="password"
               placeholder="Password"
               onChange={(e) => this.setState({ password: e.target.value })}
@@ -153,9 +154,6 @@ class Signup extends React.Component<Props, State> {
             )}
           </FormFeedback>
         </Form>
-        {this.state.responseCode === 201 && (
-          <Navigate to="/clients" replace={true} />
-        )}
       </div>
     );
   }
