@@ -74,7 +74,8 @@ class OrderUpdate extends React.Component<OrderProps, OrderState> {
         Authorization: `${this.props.token}`,
       }),
     })
-      .then((res) => {
+      .then((res) => res.json())
+      .then((data) => {
         this.props.fetch();
         this.props.updateOff();
       })
@@ -147,9 +148,17 @@ class OrderUpdate extends React.Component<OrderProps, OrderState> {
                 onChange={(e) => this.setState({ editImage: e.target.value })}
               ></Input>
             </FormGroup> */}
-            <Button className="mainBtns" type="submit">Save</Button>
+            <Button className="mainBtns" type="submit">
+              Save
+            </Button>
+            <Button
+              className="mainBtns"
+              type="button"
+              onClick={this.props.updateOff}
+            >
+              Close
+            </Button>
           </Form>
-          
         </ModalBody>
       </Modal>
     );
