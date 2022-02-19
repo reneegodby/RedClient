@@ -55,6 +55,7 @@ text-align: center;
   background-size: cover;
   height: 100vh;
   min-width: 100%;
+  min-height: 100vh;
 }
 
 .backgroundClients {
@@ -63,6 +64,7 @@ text-align: center;
   background-size: cover;
   height: 100%;
   min-width: 100%;
+  min-height: 100vh;
 }
 
 .backgroundOrders {
@@ -71,6 +73,7 @@ text-align: center;
   background-size: cover;
   height: 100vh;
   min-width: 100%;
+  min-height: 100vh;
 }
 
 /* Whole app styled */
