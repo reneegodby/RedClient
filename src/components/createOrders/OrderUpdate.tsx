@@ -34,12 +34,12 @@ class OrderUpdate extends React.Component<OrderProps, OrderState> {
   constructor(props: OrderProps) {
     super(props);
     this.state = {
-      editTypeOfOrder: "",
-      editQuantity: "",
-      editDueDate: "",
-      editPrice: "",
-      editNotes: "",
-      editImage: "",
+      editTypeOfOrder: this.props.editOrders.typeOfOrder,
+      editQuantity: this.props.editOrders.quantity,
+      editDueDate: this.props.editOrders.dueDate,
+      editPrice: this.props.editOrders.price,
+      editNotes: this.props.editOrders.notes,
+      editImage: this.props.editOrders.image,
       _isMounted: false,
     };
   }
@@ -49,12 +49,6 @@ class OrderUpdate extends React.Component<OrderProps, OrderState> {
       _isMounted: true,
     });
   }
-
-  // componentWillUnmount() {
-  //   this.setState({
-  //     _isMounted: false,
-  //   });
-  // }
 
   updateOrder = () => {
     fetch(`${APIURL}/orders/update/${this.props.editOrders.orderId}`, {
@@ -153,7 +147,7 @@ class OrderUpdate extends React.Component<OrderProps, OrderState> {
             </Button>
             <Button
               className="mainBtns"
-              type="button"
+              type="reset"
               onClick={this.props.updateOff}
             >
               Close
