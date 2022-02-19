@@ -130,9 +130,7 @@ class CreateOrder extends React.Component<Props, any> {
                 name="typeOfOrder"
                 value={this.state.typeOfOrder}
                 onChange={(e) => this.setState({ typeOfOrder: e.target.value })}
-              >
-                {" "}
-              </Input>
+              ></Input>
             </FormGroup>
             <FormGroup>
               <Label htmlFor="quantity">Quantity: </Label>
@@ -140,9 +138,7 @@ class CreateOrder extends React.Component<Props, any> {
                 name="quantity"
                 value={this.state.quantity}
                 onChange={(e) => this.setState({ quantity: e.target.value })}
-              >
-                {" "}
-              </Input>
+              ></Input>
             </FormGroup>
             <FormGroup>
               <Label htmlFor="dueDate">Due Date: </Label>
@@ -150,9 +146,7 @@ class CreateOrder extends React.Component<Props, any> {
                 name="dueDate"
                 value={this.state.dueDate}
                 onChange={(e) => this.setState({ dueDate: e.target.value })}
-              >
-                {" "}
-              </Input>
+              ></Input>
             </FormGroup>
             <FormGroup>
               <Label htmlFor="price">Price: </Label>
@@ -160,9 +154,7 @@ class CreateOrder extends React.Component<Props, any> {
                 name="price"
                 value={this.state.price}
                 onChange={(e) => this.setState({ price: e.target.value })}
-              >
-                {" "}
-              </Input>
+              ></Input>
             </FormGroup>
             <FormGroup>
               <Label htmlFor="notes">Notes: </Label>
@@ -170,21 +162,19 @@ class CreateOrder extends React.Component<Props, any> {
                 name="notes"
                 value={this.state.notes}
                 onChange={(e) => this.setState({ notes: e.target.value })}
-              >
-                {" "}
-              </Input>
+              ></Input>
             </FormGroup>
-            {/* <FormGroup>
+            <FormGroup>
               <Label htmlFor="image">Image: </Label>
               <Input
                 name="image"
                 value={this.state.image}
                 onChange={(e) => this.setState({ image: e.target.value })}
-              >
-                {" "}
-              </Input>
-            </FormGroup> */}
-            <Button className="mainBtns" type="submit">Save</Button>
+              ></Input>
+            </FormGroup>
+            <Button className="mainBtns" type="submit">
+              Save
+            </Button>
           </Form>
           <Button className="mainBtns" type="reset" onClick={this.close}>
             Close

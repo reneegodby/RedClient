@@ -134,14 +134,14 @@ class OrderUpdate extends React.Component<OrderProps, OrderState> {
                 onChange={(e) => this.setState({ editNotes: e.target.value })}
               ></Input>
             </FormGroup>
-            {/* <FormGroup>
+            <FormGroup>
               <Label htmlFor="image">Image: </Label>
               <Input
                 name="image"
                 value={this.state.editImage}
                 onChange={(e) => this.setState({ editImage: e.target.value })}
               ></Input>
-            </FormGroup> */}
+            </FormGroup>
             <Button className="mainBtns" type="submit">
               Save
             </Button>
