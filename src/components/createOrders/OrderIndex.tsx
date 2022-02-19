@@ -34,7 +34,7 @@ class OrderIndex extends React.Component<Props, any> {
   fetchOrders = () => {
     console.log("fetch Orders", this.props.token);
 
-    fetch(`${APIURL}/orders`, {
+    fetch(`${APIURL}/orders/`, {
       method: "GET",
       headers: new Headers({
         "Content-Type": "application/json",
@@ -75,15 +75,15 @@ class OrderIndex extends React.Component<Props, any> {
 
   componentDidMount() {
     this.fetchOrders();
-    this.setState({
-      _isMounted: true,
-    });
+    // this.setState({
+    //   _isMounted: true,
+    // });
   }
 
   componentWillUnmount() {
-    this.setState({
-      _isMounted: false,
-    });
+    // this.setState({
+    //   _isMounted: false,
+    // });
   }
 
   render() {
