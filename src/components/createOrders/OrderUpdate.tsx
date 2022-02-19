@@ -65,12 +65,13 @@ class OrderUpdate extends React.Component<OrderProps, OrderState> {
       }),
       headers: new Headers({
         "Content-Type": "application/json",
+        Accept: "application/json",
         Authorization: `${this.props.token}`,
       }),
     })
       .then((res) => res.json())
       .then((data) => {
-        this.props.fetch();
+        // this.props.fetch();
         this.props.updateOff();
       })
       .catch((err) => {
